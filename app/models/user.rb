@@ -9,7 +9,11 @@ class User < ApplicationRecord
     display_name
   end
 
-  def habit_score
-    BASE_SCORE + happenings.sum(:point_value)
+  def good_habit_score
+    BASE_SCORE + good_habits.sum(:point_value)
+  end
+
+  def good_habits
+    happenings
   end
 end

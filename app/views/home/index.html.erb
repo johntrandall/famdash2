@@ -16,6 +16,12 @@
   </header>
 
   <% if current_user.child? %>
-    <h2>Habit Score: <%= current_user.habit_score %></h2>
+    <hr>
+    <h3>Good Habit Score: <%= current_user.good_habit_score %></h3>
+    <small>Keep this above 100 to unlock screentime</small>
+    <% current_user.good_habits.order(:created_at).last(10) do |happening| %>
+      <%= happening.description %>
+      <%= happening.point_value %>
+    <% end %>
   <% end %>
 <% end %>
