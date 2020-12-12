@@ -27,10 +27,18 @@ Things you may want to cover:
 ```
 cd [root]
 
+brew install rbenv
+# do the caveats
+rbenv install [.ruby-version here]
+# restart shell, check that `which ruby` points at correct version
+
 brew install nvm
 # do the caveats
 nvm install [.nvmrc version here]
 nvm use
 # restart shell, check that `which node` points at correct version
 
+bundle
+rspec
+rails s
 ```
