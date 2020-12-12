@@ -26,13 +26,62 @@ RANDALL_USER_DATA = [
 ]
 
 # User.destroy_all
-# RANDALL_USER_DATA.each do |data|
-#   User.create!(data)
-# end
+RANDALL_USER_DATA.each do |data|
+  User.first_or_create!(data)
+end
+
+User.child.each do |user|
+  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       description: 'In the morning, made bed upon waking up',
+                                       point_value: 5).users << user
+
+
+  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       description: 'before eating, remembered to wash hands before eating',
+                                       point_value: 5).users << user
+  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       description: 'after mealtime, remembered to cleanup',
+                                       point_value: 5).users << user
+
+
+  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       description: 'In the morning, remembered to brush',
+                                       point_value: 5).users << user
+
+
+  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       description: 'When arriving home, remembered to put everything away immediately',
+                                       point_value: 5).users << user
+
+
+  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       description: 'before bed, remembered to floss and brush at night',
+                                       point_value: 5).users << user
+  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       description: 'before bed, Remembered to cleanup bedroom',
+                                       point_value: 5).users << user
+
+end
+
+# User.find_by(display_name: 'Max').happening_templates.first_or_create!(kind: :good_habit,
+#                                                    description: 'Remembered to cleanup bedroom in the morning',
+#                                                    point_value: 5)
+# User.find_by(display_name: 'Max').happening_templates.first_or_create!(kind: :good_habit,
+#                                                    description: 'Remembered to brush in morning',
+#                                                    point_value: 5)
+# User.find_by(display_name: 'Max').happening_templates.first_or_create!(kind: :good_habit,
+#                                                    description: 'Remembered to floss and brush at night',
+#                                                    point_value: 5)
 
 User.where(display_name: 'TestChild').destroy_all
 test_child = User.create!({ display_name: 'TestChild',
                             role: :child })
-Happening.create!(user: test_child,
-                 kind: :good_habit,
-                 point_value: 5)
+test_child.happenings.create!(reporting_user: test_child,
+                              kind: :good_habit,
+                              point_value: 5,
+                              description: 'i am a happening description')
+happening_template = HappeningTemplate.where(kind: :good_habit,
+                                             point_value: 5).first_or_create!
+happening_template.description ||= 'remembered to wash hands before eating'
+happening_template.save!
+happening_template.users << test_child

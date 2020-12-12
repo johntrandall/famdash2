@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_12_170457) do
+ActiveRecord::Schema.define(version: 2020_12_12_183926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "happening_templates", force: :cascade do |t|
+    t.string "kind"
+    t.string "description"
+    t.integer "point_value"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_happening_templates_on_user_id"
+  end
+
+  create_table "happening_templates_users", force: :cascade do |t|
+    t.bigint "happening_template_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["happening_template_id"], name: "index_happening_templates_users_on_happening_template_id"
+    t.index ["user_id"], name: "index_happening_templates_users_on_user_id"
+  end
 
   create_table "happenings", force: :cascade do |t|
     t.string "kind"
@@ -22,6 +41,8 @@ ActiveRecord::Schema.define(version: 2020_12_12_170457) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "reporting_user_id"
+    t.index ["reporting_user_id"], name: "index_happenings_on_reporting_user_id"
     t.index ["user_id"], name: "index_happenings_on_user_id"
   end
 

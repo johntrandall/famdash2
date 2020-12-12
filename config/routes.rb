@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resource :current_user, only: :update
+  resource :happenings, only: :create
 end

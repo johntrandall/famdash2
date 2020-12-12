@@ -12,6 +12,7 @@ class User < ApplicationRecord
   BASE_SCORE = 100
 
   has_many :happenings
+  has_and_belongs_to_many :happening_templates
 
   enum role: { child: 'child', caretaker: 'caretaker' }
 
@@ -26,4 +27,9 @@ class User < ApplicationRecord
   def good_habits
     happenings
   end
+
+  def good_habit_templates
+    happening_templates
+  end
+
 end
