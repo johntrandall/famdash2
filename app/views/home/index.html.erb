@@ -1,7 +1,9 @@
 <nav>
   <ul>
     <% User.all.each do |user| %>
-      <li><%= user.display_name %></li>
+      <li>
+        <%= button_to user.display_name, current_user_path, method: :patch, params: { id: user.id } %> <%= 'LOGGED IN' if current_user == user %>
+      </li>
     <% end %>
   </ul>
 </nav>
