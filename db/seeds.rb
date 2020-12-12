@@ -6,13 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.destroy_all
+
 
 RANDALL_USER_DATA = [
   {display_name: 'Max',
    role: :child},
   {display_name: 'Sam',
    role: :child},
-  {display_name: 'Fin',
+  {display_name: 'Finn',
+   role: :child},
+  {display_name: 'TestChild',
    role: :child},
   {display_name: 'John',
    role: :caretaker},
