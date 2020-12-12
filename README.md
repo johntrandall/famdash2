@@ -38,7 +38,11 @@ nvm install [.nvmrc version here]
 nvm use
 # restart shell, check that `which node` points at correct version
 
+brew install yarn
+
+gem install bundler
 bundle
-rspec
-rails s
+
+bundle exec rspec
+bundle exec rails s
 ```
