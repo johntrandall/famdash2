@@ -22,3 +22,15 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## Setup
+```
+cd [root]
+
+brew install nvm
+# do the caveats
+nvm install [.nvmrc version here]
+nvm use
+# restart shell, check that `which node` points at correct version
+
+```
