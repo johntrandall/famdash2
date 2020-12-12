@@ -5,3 +5,27 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+RANDALL_USER_DATA = [
+  {display_name: 'Max',
+   role: :child},
+  {display_name: 'Sam',
+   role: :child},
+  {display_name: 'Fin',
+   role: :child},
+  {display_name: 'John',
+   role: :caretaker},
+  {display_name: 'Karina',
+   role: :caretaker},
+  {display_name: 'Natt',
+   role: :caretaker},
+  {display_name: 'Don',
+   role: :caretaker},
+  {display_name: 'Janet',
+   role: :caretaker},
+]
+
+RANDALL_USER_DATA.each do |data|
+  User.create!(data)
+end
