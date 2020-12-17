@@ -9,7 +9,6 @@
 #  updated_at   :datetime         not null
 #
 class User < ApplicationRecord
-
   has_many :happenings
   alias good_habits :happenings
 
@@ -17,6 +16,12 @@ class User < ApplicationRecord
   alias good_habit_templates :happening_templates
 
   enum role: { child: 'child', caretaker: 'caretaker' }
+
+  def self.decay_good_habit_scores!
+    User.child.each do |child|
+      child.decay_good_habit_score!
+    end
+  end
 
   def name
     display_name
@@ -26,7 +31,7 @@ class User < ApplicationRecord
     good_habits.sum(:point_value)
   end
 
-  def decay_good_habit_score
+  def decay_good_habit_score!
     happenings.create!(description: 'overnight decay',
                        point_value: -1 * (good_habit_score / 2))
   end
