@@ -27,7 +27,7 @@ RANDALL_USER_DATA = [
 
 # User.destroy_all
 RANDALL_USER_DATA.each do |data|
-  User.first_or_create!(data)
+  User.find_or_create_by!(data)
 end
 
 User.child.each do |user|
