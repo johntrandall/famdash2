@@ -19,8 +19,9 @@
 require 'rails_helper'
 
 RSpec.describe Happening, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # pending "add some examples to (or delete) #{__FILE__}"
   it 'works' do
-
+    user = User.create!
+    user.happenings.create!
   end
 end

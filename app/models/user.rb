@@ -9,10 +9,12 @@
 #  updated_at   :datetime         not null
 #
 class User < ApplicationRecord
-  BASE_SCORE = 100
 
   has_many :happenings
+  alias good_habits :happenings
+
   has_and_belongs_to_many :happening_templates
+  alias good_habit_templates :happening_templates
 
   enum role: { child: 'child', caretaker: 'caretaker' }
 
@@ -21,15 +23,9 @@ class User < ApplicationRecord
   end
 
   def good_habit_score
-    BASE_SCORE + good_habits.sum(:point_value)
+    good_habits.sum(:point_value)
   end
 
-  def good_habits
-    happenings
-  end
-
-  def good_habit_templates
-    happening_templates
   end
 
 end
