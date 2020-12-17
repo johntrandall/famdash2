@@ -31,35 +31,36 @@ RANDALL_USER_DATA.each do |data|
 end
 
 User.child.each do |user|
-  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+  user.happening_templates.find_or_create_by!(kind: :good_habit,
                                        description: 'In the morning, made bed upon waking up',
-                                       point_value: 1).users << user
+                                       point_value: 1)
 
-  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+  user.happening_templates.find_or_create_by!(kind: :good_habit,
                                        description: 'In the morning, remembered to brush',
-                                       point_value: 5).users << user
+                                       point_value: 5)
 
 
-  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+  user.happening_templates.find_or_create_by!(kind: :good_habit,
                                        description: 'before eating, remembered to wash hands',
-                                       point_value: 1).users << user
-  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       point_value: 1)
+
+  user.happening_templates.find_or_create_by!(kind: :good_habit,
                                        description: 'after mealtime, remembered to cleanup',
-                                       point_value: 1).users << user
+                                       point_value: 1)
 
 
 
-  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+  user.happening_templates.find_or_create_by!(kind: :good_habit,
                                        description: 'When arriving home, remembered to put everything away immediately',
-                                       point_value: 5).users << user
+                                       point_value: 5)
 
 
-  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+  user.happening_templates.find_or_create_by!(kind: :good_habit,
                                        description: 'before bed, remembered to floss and brush at night',
-                                       point_value: 5).users << user
-  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       point_value: 5)
+  user.happening_templates.find_or_create_by!(kind: :good_habit,
                                        description: 'before bed, remembered to cleanup bedroom',
-                                       point_value: 5).users << user
+                                       point_value: 5)
 
 end
 
