@@ -31,6 +31,7 @@ RANDALL_USER_DATA.each do |data|
 end
 
 User.child.each do |user|
+  user.happening_templates.destroy_all!
   user.happening_templates.find_or_create_by!(kind: :good_habit,
                                        description: 'In the morning, made bed upon waking up',
                                        point_value: 1)
@@ -73,6 +74,7 @@ end
 # User.find_by(display_name: 'Max').happening_templates.first_or_create!(kind: :good_habit,
 #                                                    description: 'Remembered to floss and brush at night',
 #                                                    point_value: 5)
+
 
 User.where(display_name: 'TestChild').destroy_all
 test_child = User.create!({ display_name: 'TestChild',
