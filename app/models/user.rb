@@ -26,6 +26,9 @@ class User < ApplicationRecord
     good_habits.sum(:point_value)
   end
 
+  def decay_good_habit_score
+    happenings.create!(description: 'overnight decay',
+                       point_value: -1 * (good_habit_score / 2))
   end
 
 end

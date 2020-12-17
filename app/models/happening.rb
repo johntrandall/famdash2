@@ -18,5 +18,5 @@
 #
 class Happening < ApplicationRecord
   belongs_to :user
-  belongs_to :reporting_user, class_name: User.to_s
+  belongs_to :reporting_user, class_name: User.to_s, optional: true
 end
