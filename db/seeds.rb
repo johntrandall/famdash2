@@ -33,20 +33,20 @@ end
 User.child.each do |user|
   HappeningTemplate.find_or_create_by!(kind: :good_habit,
                                        description: 'In the morning, made bed upon waking up',
-                                       point_value: 5).users << user
-
-
-  HappeningTemplate.find_or_create_by!(kind: :good_habit,
-                                       description: 'before eating, remembered to wash hands before eating',
-                                       point_value: 5).users << user
-  HappeningTemplate.find_or_create_by!(kind: :good_habit,
-                                       description: 'after mealtime, remembered to cleanup',
-                                       point_value: 5).users << user
-
+                                       point_value: 1).users << user
 
   HappeningTemplate.find_or_create_by!(kind: :good_habit,
                                        description: 'In the morning, remembered to brush',
                                        point_value: 5).users << user
+
+
+  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       description: 'before eating, remembered to wash hands',
+                                       point_value: 1).users << user
+  HappeningTemplate.find_or_create_by!(kind: :good_habit,
+                                       description: 'after mealtime, remembered to cleanup',
+                                       point_value: 1).users << user
+
 
 
   HappeningTemplate.find_or_create_by!(kind: :good_habit,
@@ -58,7 +58,7 @@ User.child.each do |user|
                                        description: 'before bed, remembered to floss and brush at night',
                                        point_value: 5).users << user
   HappeningTemplate.find_or_create_by!(kind: :good_habit,
-                                       description: 'before bed, Remembered to cleanup bedroom',
+                                       description: 'before bed, remembered to cleanup bedroom',
                                        point_value: 5).users << user
 
 end
