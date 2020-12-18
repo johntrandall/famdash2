@@ -1,8 +1,18 @@
 <nav>
+  Pick current user:
   <ul>
     <% User.all.each do |user| %>
       <li>
         <%= button_to user.display_name, current_user_path, method: :patch, params: { id: user.id } %> <%= 'LOGGED IN' if current_user == user %>
+      </li>
+    <% end %>
+  </ul>
+
+  Dashboard for:
+  <ul>
+    <% User.all.each do |user| %>
+      <li>
+        <%= button_to user.display_name, selected_user_path, method: :patch, params: { id: user.id } %> <%= 'SELECTED' if selected_user == user %>
       </li>
     <% end %>
   </ul>
@@ -23,7 +33,9 @@
     <small>(Keep this above 100 to unlock screentime)</small>
     <% current_user.good_habits.order(:created_at).last(10).each do |happening| %>
       <div>
-        <%= happening.description %> +<%= happening.point_value %>  <small>(noticed by: <%= happening.reporting_user&.display_name %> at <%= happening.created_at.to_formatted_s(:short) %>)</small>
+        <%= happening.description %> +<%= happening.point_value %>
+        <small>(noticed by: <%= happening.reporting_user&.display_name %>
+          at <%= happening.created_at.to_formatted_s(:short) %>)</small>
       </div>
     <% end %>
 
