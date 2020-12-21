@@ -35,8 +35,6 @@
   </header>
 
   <% if selected_user.child? %>
-    <hr>
-
     <header>
       <h3>Habit Log</h3>
       <h4 style="display:inline">Score: <%= selected_user.good_habit_score %></h4>
@@ -56,6 +54,11 @@
     <% end %>
 
     <hr>
+    <h3>Required Habits</h3>
+    <% selected_user.happening_templates.pass_fail_habit.active.each do |template| %>
+
+    <% end %>
+
     <h3>Good Habits</h3>
     <% selected_user.happening_templates.good_habit.active.each do |template| %>
       <%= button_to happenings_path, method: :post, params: { template_id: template,
@@ -65,7 +68,6 @@
       <% end %>
     <% end %>
 
-    <hr>
     <h3>Bad Habits</h3>
     <% selected_user.happening_templates.bad_habit.active.each do |template| %>
       <%= button_to happenings_path, method: :post, params: { template_id: template,
