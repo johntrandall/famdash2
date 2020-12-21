@@ -1,3 +1,8 @@
+class Happening < ApplicationRecord
+  belongs_to :user
+  belongs_to :reporting_user, class_name: User.to_s, optional: true
+end
+
 # == Schema Information
 #
 # Table name: happenings
@@ -16,7 +21,3 @@
 #  index_happenings_on_reporting_user_id  (reporting_user_id)
 #  index_happenings_on_user_id            (user_id)
 #
-class Happening < ApplicationRecord
-  belongs_to :user
-  belongs_to :reporting_user, class_name: User.to_s, optional: true
-end

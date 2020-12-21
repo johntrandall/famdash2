@@ -1,3 +1,10 @@
+
+require 'rails_helper'
+
+RSpec.describe HappeningTemplate, type: :model do
+  # pending "add some examples to (or delete) #{__FILE__}"
+end
+
 # == Schema Information
 #
 # Table name: happening_templates
@@ -14,8 +21,3 @@
 #
 #  index_happening_templates_on_user_id  (user_id)
 #
-require 'rails_helper'
-
-RSpec.describe HappeningTemplate, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
-end
