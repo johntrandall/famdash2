@@ -19,8 +19,15 @@
 </nav>
 
 
+<% if !current_user %>
+  Identify yourself above
+<% end %>
 
-<% if selected_user %>
+<% if !selected_user %>
+  Select a user above to view that user's Dashboard
+<% end %>
+
+<% if current_user && selected_user %>
   <header>
     <h2>
       <%= selected_user.display_name %> <small>(<%= selected_user.role %>)</small>
