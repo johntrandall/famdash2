@@ -30,25 +30,36 @@
   <% if selected_user.child? %>
     <hr>
 
-    <h3>Good Habits!</h3>
+    <h3>Habit Log</h3>
     <h4 style="display:inline">Score: <%= selected_user.good_habit_score %></h4>
     <small>(Keep this above 100 to unlock screentime)</small>
     <% selected_user.good_habits.order(:created_at).last(10).each do |happening| %>
       <div>
-        <%= happening.description %> +<%= happening.point_value %>
+        <%= happening.description %> <%= happening.point_value > 0 ? "+" : '' %> <%= happening.point_value %>
         <small>(noticed by <%= happening.reporting_user&.display_name %>
           at <%= happening.created_at.to_formatted_s(:short) %>)</small>
       </div>
     <% end %>
 
     <hr>
-
-    <% selected_user.good_habit_templates.active.each do |template| %>
+    <h3>Good Habits</h3>
+    <% selected_user.happening_templates.good_habit.active.each do |template| %>
       <%= button_to happenings_path, method: :post, params: { template_id: template,
                                                               selected_user_id: selected_user.id,
                                                               reporting_user_id: current_user.id } do %>
         <%= [template.description, template.point_value].join(' - ') %>
       <% end %>
     <% end %>
+
+    <hr>
+    <h3>Bad Habits</h3>
+    <% selected_user.happening_templates.bad_habit.active.each do |template| %>
+      <%= button_to happenings_path, method: :post, params: { template_id: template,
+                                                              selected_user_id: selected_user.id,
+                                                              reporting_user_id: current_user.id } do %>
+        <%= [template.description, template.point_value].join(' - ') %>
+      <% end %>
+    <% end %>
+
   <% end %>
 <% end %>

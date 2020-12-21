@@ -78,12 +78,17 @@ User.find_by(display_name: 'Max').happening_templates
                         description: 'Garbage left in a bad state.')
     .update(point_value: -5)
 
-# User.find_by(display_name: 'Max').happening_templates.first_or_create!(kind: :good_habit,
-#                                                    description: 'Remembered to brush in morning',
-#                                                    point_value: 5)
-# User.find_by(display_name: 'Max').happening_templates.first_or_create!(kind: :good_habit,
-#                                                    description: 'Remembered to floss and brush at night',
-#                                                    point_value: 5)
+
+User.find_by(display_name: 'Sam').happening_templates
+    .find_or_create_by!(kind: :bad_habit,
+                        description: 'Saying something is done that is not done')
+    .update(point_value: -20)
+User.find_by(display_name: 'Sam').happening_templates
+    .find_or_create_by!(kind: :bad_habit,
+                        description: 'Getting distracted while working with Dad.')
+    .update(point_value: -5)
+
+
 
 User.where(display_name: 'TestChild').destroy_all
 test_child = User.create!({ display_name: 'TestChild',
