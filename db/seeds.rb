@@ -31,50 +31,59 @@ RANDALL_USER_DATA.each do |data|
 end
 
 User.child.each do |user|
-  user.happening_templates.destroy_all!
+  # user.happening_templates.destroy_all!
   user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                       description: 'In the morning, made bed upon waking up',
-                                       point_value: 1)
-
-  user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                       description: 'In the morning, remembered to brush',
-                                       point_value: 5)
-
+                                              description: 'In the morning, made bed upon waking up',
+                                              point_value: 1)
 
   user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                       description: 'before eating, remembered to wash hands',
-                                       point_value: 1)
+                                              description: 'In the morning, remembered to brush',
+                                              point_value: 5)
 
   user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                       description: 'after mealtime, remembered to cleanup',
-                                       point_value: 1)
-
-
+                                              description: 'before eating, remembered to wash hands',
+                                              point_value: 1)
 
   user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                       description: 'When arriving home, remembered to put everything away immediately',
-                                       point_value: 5)
-
+                                              description: 'after mealtime, remembered to cleanup',
+                                              point_value: 1)
 
   user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                       description: 'before bed, remembered to floss and brush at night',
-                                       point_value: 5)
+                                              description: 'When arriving home, remembered to put everything away immediately',
+                                              point_value: 5)
+
   user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                       description: 'before bed, remembered to cleanup bedroom',
-                                       point_value: 5)
+                                              description: 'before bed, remembered to floss and brush at night',
+                                              point_value: 5)
+  user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                              description: 'before bed, remembered to cleanup bedroom',
+                                              point_value: 5)
 
 end
 
-# User.find_by(display_name: 'Max').happening_templates.first_or_create!(kind: :good_habit,
-#                                                    description: 'Remembered to cleanup bedroom in the morning',
-#                                                    point_value: 5)
+User.find_by(display_name: 'Max').happening_templates
+    .find_or_create_by!(kind: :bad_habit,
+                        description: 'Leaving a trail')
+    .update!(point_value: -5)
+User.find_by(display_name: 'Max').happening_templates
+    .find_or_create_by!(kind: :bad_habit,
+                        description: 'Saying something is done that is not done')
+    .update(point_value: -20)
+User.find_by(display_name: 'Max').happening_templates
+    .find_or_create_by!(kind: :bad_habit,
+                        description: 'Getting distracted while working with Dad.')
+    .update(point_value: -5)
+User.find_by(display_name: 'Max').happening_templates
+    .find_or_create_by!(kind: :bad_habit,
+                        description: 'Garbage left in a bad state.')
+    .update(point_value: -5)
+
 # User.find_by(display_name: 'Max').happening_templates.first_or_create!(kind: :good_habit,
 #                                                    description: 'Remembered to brush in morning',
 #                                                    point_value: 5)
 # User.find_by(display_name: 'Max').happening_templates.first_or_create!(kind: :good_habit,
 #                                                    description: 'Remembered to floss and brush at night',
 #                                                    point_value: 5)
-
 
 User.where(display_name: 'TestChild').destroy_all
 test_child = User.create!({ display_name: 'TestChild',
