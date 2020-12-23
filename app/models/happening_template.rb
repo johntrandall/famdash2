@@ -1,4 +1,6 @@
 class HappeningTemplate < ApplicationRecord
+  acts_as_list scope: [:user_id], touch_on_update: false
+
   has_and_belongs_to_many :users
   scope :active, -> { all }
 
@@ -15,6 +17,7 @@ end
 #  description :string
 #  kind        :string
 #  point_value :integer
+#  position    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :bigint

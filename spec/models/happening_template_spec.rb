@@ -13,6 +13,7 @@ end
 #  description :string
 #  kind        :string
 #  point_value :integer
+#  position    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :bigint

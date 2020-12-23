@@ -16,6 +16,23 @@ class HappeningTemplatesController < ApplicationController
     redirect_back(fallback_location: happening_templates_path)
   end
 
+  def sort_higher
+    happening_template = selected_user.happening_templates.find(params[:id])
+    happening_template.decrement_position
+    flash[:success] = 'Order adjusted'
+
+    redirect_back(fallback_location: happening_templates_path)
+  end
+
+
+  def sort_down
+    happening_template = selected_user.happening_templates.find(params[:id])
+    happening_template.increment_position
+    flash[:success] = 'Order adjusted'
+
+    redirect_back(fallback_location: happening_templates_path)
+  end
+
   private
 
   def happening_template_params

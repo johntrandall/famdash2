@@ -1,6 +1,7 @@
 <% if current_user && selected_user %>
   <table>
     <% @happening_templates.each do |template| %>
+
       <tr>
         <%= simple_form_for template do |f| %>
           <td><%= f.input :description %></td>
@@ -8,7 +9,9 @@
           <td><%= f.input :point_value %></td>
           <td><%= f.submit 'Save' %>
         <% end %>
-        </td>
+        <td>&nbsp; &nbsp; &nbsp; sort:</td>
+        <td><%= button_to 'up', sort_higher_happening_template_path(template), method: :patch %></td>
+        <td><%= button_to 'down', sort_down_happening_template_path(template), method: :patch %></td>
       </tr>
     <% end %>
   </table>
