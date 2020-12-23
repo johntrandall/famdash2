@@ -1,0 +1,39 @@
+
+<header>
+  Pick current user:
+  <ul>
+    <% User.all.each do |user| %>
+      <li>
+        <%= button_to user.display_name, current_user_path, method: :patch, params: { id: user.id } %> <%= 'LOGGED IN' if current_user == user %>
+      </li>
+    <% end %>
+  </ul>
+
+  Dashboard for:
+  <ul>
+    <% User.all.each do |user| %>
+      <li>
+        <%= button_to user.display_name, selected_user_path, method: :patch, params: { id: user.id } %> <%= 'SELECTED' if selected_user == user %>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if !current_user %>
+    Identify yourself above
+  <% end %>
+
+  <% if !selected_user %>
+    Select a user above to view that user's dashboard
+  <% end %>
+
+  <nav>
+    <ul>
+      <li>
+        <%= link_to 'home', home_index_path %>
+      </li>
+      <li>
+        <%= link_to 'setup chores', happening_templates_path %>
+      </li>
+    </ul>
+  </nav>
+</header>

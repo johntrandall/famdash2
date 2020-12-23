@@ -1,32 +1,3 @@
-<nav>
-  Pick current user:
-  <ul>
-    <% User.all.each do |user| %>
-      <li>
-        <%= button_to user.display_name, current_user_path, method: :patch, params: { id: user.id } %> <%= 'LOGGED IN' if current_user == user %>
-      </li>
-    <% end %>
-  </ul>
-
-  Dashboard for:
-  <ul>
-    <% User.all.each do |user| %>
-      <li>
-        <%= button_to user.display_name, selected_user_path, method: :patch, params: { id: user.id } %> <%= 'SELECTED' if selected_user == user %>
-      </li>
-    <% end %>
-  </ul>
-</nav>
-
-
-<% if !current_user %>
-  Identify yourself above
-<% end %>
-
-<% if !selected_user %>
-  Select a user above to view that user's Dashboard
-<% end %>
-
 <% if current_user && selected_user %>
   <header>
     <h2>
