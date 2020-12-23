@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resource :current_user, only: :update
   resource :selected_user, only: :update
   resource :happenings, only: :create
+  resources :happening_templates, only: [:index, :update]
 end

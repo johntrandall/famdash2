@@ -1,0 +1,15 @@
+<% if current_user && selected_user %>
+  <table>
+    <% @happening_templates.each do |template| %>
+      <tr>
+        <%= simple_form_for template do |f| %>
+          <td><%= f.input :description %></td>
+          <td><%= f.select :kind, HappeningTemplate.kinds.keys %></td>
+          <td><%= f.input :point_value %></td>
+          <td><%= f.submit 'Save' %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
