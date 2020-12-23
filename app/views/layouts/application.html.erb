@@ -14,6 +14,11 @@
   </head>
 
   <body class="<%= controller_name %> <%= action_name %>">
+    <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+    <% end %>
     <%= render 'layouts/nav' %>
     <%= yield %>
     <footer>&nbsp;</footer>
