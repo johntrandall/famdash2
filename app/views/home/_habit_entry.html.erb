@@ -1,0 +1,14 @@
+<section>
+  <% selected_user.happening_templates.active.each do |template| %>
+    <% if template.separator? %>
+      <br>
+      <u style="text-decoration: underline"><%= template.description.titleize %></u>
+    <% else %>
+      <%= button_to happenings_path, method: :post, params: { template_id: template,
+                                                              selected_user_id: selected_user.id,
+                                                              reporting_user_id: current_user.id } do %>
+        <%= [template.description, template.point_value].join(' - ') %>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>

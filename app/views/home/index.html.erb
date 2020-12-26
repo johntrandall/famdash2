@@ -6,47 +6,8 @@
   </header>
 
   <% if selected_user.child? %>
-    <header>
-      <h3>Habit Log</h3>
-      <h4 style="display:inline">Score: <%= selected_user.good_habit_score %></h4>
-      <small>(Keep this above 100 to unlock screentime)</small>
-    </header>
-    </br>
-    </br>
-    <% selected_user.happenings.group_by_day(&:created_at).each do |group| %>
-      <span style="text-decoration: underline "><%= group.first %></span>
-      <% group.second.each do |happening| %>
-        <div>
-          <%= happening.description %> <%= happening.point_value > 0 ? "+" : '' %> <%= happening.point_value %>
-          <small>(noticed by <%= happening.reporting_user&.display_name %>
-            at <%= happening.created_at.strftime("%H:%M") %>)</small>
-        </div>
-      <% end %>
-    <% end %>
-
+    <%= render 'habit_log' %>
     <hr>
-    <h3>Required Habits</h3>
-    <% selected_user.happening_templates.pass_fail_habit.active.each do |template| %>
-
-    <% end %>
-
-    <h3>Good Habits</h3>
-    <% selected_user.happening_templates.good_habit.active.each do |template| %>
-      <%= button_to happenings_path, method: :post, params: { template_id: template,
-                                                              selected_user_id: selected_user.id,
-                                                              reporting_user_id: current_user.id } do %>
-        <%= [template.description, template.point_value].join(' - ') %>
-      <% end %>
-    <% end %>
-
-    <h3>Bad Habits</h3>
-    <% selected_user.happening_templates.bad_habit.active.each do |template| %>
-      <%= button_to happenings_path, method: :post, params: { template_id: template,
-                                                              selected_user_id: selected_user.id,
-                                                              reporting_user_id: current_user.id } do %>
-        <%= [template.description, template.point_value].join(' - ') %>
-      <% end %>
-    <% end %>
-
+    <%= render 'habit_entry' %>
   <% end %>
 <% end %>

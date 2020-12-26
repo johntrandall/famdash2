@@ -1,6 +1,11 @@
 <% if current_user && selected_user %>
   <table>
     <% @happening_templates.each do |template| %>
+      <% if template.separator? %>
+        <tr>
+          <td colspan="0"><em>---<%= template.description %></em>---</td>
+        </tr>
+      <% end %>
 
       <tr>
         <%= simple_form_for template do |f| %>
