@@ -1,0 +1,7 @@
+<%= button_to happenings_path, method: :post, params: { template_id: template,
+                                                        selected_user_id: selected_user.id,
+                                                        reporting_user_id: current_user.id,
+                                                        event_kind: :habit_succeed } do %>
+  <%= template.description %>
+  +<%= template.point_value %>
+<% end %>

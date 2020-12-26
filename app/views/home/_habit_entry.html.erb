@@ -4,11 +4,8 @@
       <br>
       <u style="text-decoration: underline"><%= template.description.titleize %></u>
     <% else %>
-      <%= button_to happenings_path, method: :post, params: { template_id: template,
-                                                              selected_user_id: selected_user.id,
-                                                              reporting_user_id: current_user.id } do %>
-        <%= [template.description, template.point_value].join(' - ') %>
-      <% end %>
+      <%= render "#{template.kind}_button", template: template %>
+      <br><br>
     <% end %>
   <% end %>
 </section>
