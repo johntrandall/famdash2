@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :happenings
   alias good_habits :happenings
 
-  has_and_belongs_to_many :happening_templates, -> { order(position: :asc) }
+  has_many :happening_templates, -> { order(position: :asc) }
   alias good_habit_templates :happening_templates
 
   enum role: { child: 'child', caretaker: 'caretaker' }

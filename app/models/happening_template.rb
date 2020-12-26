@@ -1,12 +1,13 @@
 class HappeningTemplate < ApplicationRecord
   acts_as_list scope: [:user_id], touch_on_update: false
 
-  has_and_belongs_to_many :users
+  belongs_to :user
   scope :active, -> { all }
 
-  enum kind: { good_habit: :good_habit,
-               bad_habit: :bad_habit,
-               pass_fail_habit: :pass_fail_habit }
+  enum kind: { separator: 'separator',
+               good_habit: 'good_habit',
+               bad_habit: 'bad_habit',
+               pass_fail_habit: 'pass_fail_habit' }
 end
 
 # == Schema Information

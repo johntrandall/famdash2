@@ -1,0 +1,19 @@
+<section>
+  <header>
+    <h3>Habit Log</h3>
+    <h4 style="display:inline">Score: <%= selected_user.good_habit_score %></h4>
+    <small>(Keep this above 100 to unlock screentime)</small>
+  </header>
+  </br>
+  </br>
+  <% selected_user.happenings.group_by_day(&:created_at).each do |group| %>
+    <span style="text-decoration: underline "><%= group.first %></span>
+    <% group.second.each do |happening| %>
+      <div>
+        <%= happening.description %> <%= happening.point_value > 0 ? "+" : '' %> <%= happening.point_value %>
+        <small>(noticed by <%= happening.reporting_user&.display_name %>
+          at <%= happening.created_at.strftime("%H:%M") %>)</small>
+      </div>
+    <% end %>
+  <% end %>
+</section>

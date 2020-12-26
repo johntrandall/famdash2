@@ -34,14 +34,12 @@ describe HappeningTemplatesController do
     end
 
     it "shows the selected-user's happening_templates" do
-      happening_template = HappeningTemplate.create!
-      user.happening_templates << happening_template
 
       # expect_any_instance_of(described_class).to receive(:selected_user).and_return(user)
       # expect_any_instance_of(described_class).to receive(:current_user).and_return(user)
 
       # allow(session).to receive('flash').and_call_original
-
+      happening_template = HappeningTemplate.create!(user: user)
       name
 
       get :index

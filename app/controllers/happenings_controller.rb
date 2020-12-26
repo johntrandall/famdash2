@@ -1,10 +1,8 @@
 class HappeningsController < ApplicationController
   def create
-    happening_template = HappeningTemplate.where(id: happening_params_from_template[:template_id]).first
     reporting_user = User.find(happening_params_from_template[:reporting_user_id])
     reportee_user = User.find(happening_params_from_template[:selected_user_id])
-
-    raise "user does not have this template" unless happening_template.users.include? reportee_user
+    happening_template = reportee_user.happening_templates.find(happening_params_from_template[:template_id])
 
     Happening.create!(user: reportee_user,
                       reporting_user: reporting_user,
