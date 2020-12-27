@@ -9,14 +9,18 @@ end
 #
 # Table name: happening_templates
 #
-#  id          :bigint           not null, primary key
-#  description :string
-#  kind        :string
-#  point_value :integer
-#  position    :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  user_id     :bigint
+#  id                  :bigint           not null, primary key
+#  description         :string
+#  kind                :string
+#  name                :string
+#  point_value         :integer
+#  position            :integer
+#  show_fail_button    :boolean          default(FALSE)
+#  show_pass_button    :boolean          default(FALSE)
+#  show_success_button :boolean          default(TRUE)
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  user_id             :bigint
 #
 # Indexes
 #

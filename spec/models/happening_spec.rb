@@ -16,6 +16,7 @@ end
 #  id                :bigint           not null, primary key
 #  description       :string
 #  kind              :string
+#  name              :string
 #  point_value       :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null

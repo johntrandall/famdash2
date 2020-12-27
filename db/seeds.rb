@@ -37,112 +37,174 @@ HappeningTemplate.destroy_all
 User.child.each do |child_user|
   # user.happening_templates.destroy_all!
   child_user.happening_templates.find_or_create_by!(kind: :separator,
-                                                    description: 'morning',
+                                                    name: 'morning')
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'Waking up on time',
+                                                    show_success_button: true,
+                                                    point_value: 1)
+  # expires_to_fail_time; 12pm
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'Exercise (full session and log)',
+                                                    show_success_button: true,
+                                                    point_value: 5)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'Practice Music',
+                                                    show_success_button: true,
+                                                    point_value: 5)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'morning routines promptly',
+                                                    show_success_button: true,
+                                                    show_fail_button: true,
+                                                    point_value: 1)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'Brushed immediately after breakfast',
+                                                    show_success_button: true,
+                                                    show_fail_button: true,
+                                                    point_value: 5)
+
+  ##############################
+  child_user.happening_templates.find_or_create_by!(kind: :separator,
+                                                    name: 'mealtime',
                                                     point_value: 0)
 
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'Waking up on time',
-                                                    point_value: 1)
   child_user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                                    description: 'Exercise (full session and log)',
-                                                    point_value: 5)
-  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                                    description: 'made bed upon waking up',
+                                                    name: 'before breakfast- washed hands without prompting',
+                                                    show_success_button: true,
+                                                    show_fail_button: true,
                                                     point_value: 1)
 
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'remembered to brush',
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'after breakfast- cleaned up promptly',
+                                                    show_success_button: true,
+                                                    show_fail_button: true,
+                                                    point_value: 1)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'before lunch- washed hands without prompting',
+                                                    show_success_button: true,
+                                                    show_fail_button: true,
+                                                    point_value: 1)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'after lunch- cleaned up promptly',
+                                                    show_success_button: true,
+                                                    show_fail_button: true,
+                                                    point_value: 1)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'before dinner- washed hands without prompting',
+                                                    show_success_button: true,
+                                                    show_fail_button: true,
+                                                    point_value: 1)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'after dinner- cleaned up promptly',
+                                                    show_success_button: true,
+                                                    show_fail_button: true,
+                                                    point_value: 1)
+
+  ##############################
+  child_user.happening_templates.find_or_create_by!(kind: :separator,
+                                                    name: 'evening',
+                                                    point_value: 0)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'Done with responsibilies by the time parents are done with work',
+                                                    show_success_button: true,
+                                                    show_pass_button: true,
+                                                    show_fail_button: true,
                                                     point_value: 5)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'FAMILY GOAL: post dinner cleanup in less than 15min',
+                                                    show_success_button: true,
+                                                    show_pass_button: true,
+                                                    show_fail_button: true,
+                                                    point_value: 10)
+
+  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
+                                                    name: 'floss and brush before bed without prompting',
+                                                    show_success_button: true,
+                                                    show_fail_button: true,
+                                                    point_value: 5)
+                                                    # expire_to_fail_time: '24:00',
 
   child_user.happening_templates.find_or_create_by!(kind: :separator,
-                                                    description: 'mealtime',
+                                                    name: 'General',
                                                     point_value: 0)
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'before breakfast, washed hands',
-                                                    point_value: 1)
-
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'after breakfast, cleaned up immediately',
-                                                    point_value: 1)
-
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'before lunch, washed hands',
-                                                    point_value: 1)
-
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'after lunch, cleaned up immediately',
-                                                    point_value: 1)
-
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'before dinner, washed hands',
-                                                    point_value: 1)
-
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'after dinner, cleaned up immediately',
-                                                    point_value: 1)
-
-  child_user.happening_templates.find_or_create_by!(kind: :separator,
-                                                    description: 'evening',
-                                                    point_value: 0)
-
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'Ready for evening by the time parents are done with work',
-                                                    point_value: 5)
 
   child_user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                                    description: 'FAMILY GOAL: post dinner cleanup in less than 15min',
-                                                    point_value: 20)
-
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'floss and brush before bed',
-                                                    point_value: 5)
-  child_user.happening_templates.find_or_create_by!(kind: :good_habit,
-                                                    description: 'tidy bedroom before bed',
-                                                    point_value: 1)
-
-  child_user.happening_templates.find_or_create_by!(kind: :separator,
-                                                    description: 'General',
-                                                    point_value: 0)
-
-  child_user.happening_templates.find_or_create_by!(kind: :pass_fail_habit,
-                                                    description: 'Upon arriving home, put everything away immediately',
+                                                    name: 'Upon arriving home, put everything away immediately',
                                                     point_value: 5)
 
   child_user.happening_templates.find_or_create_by!(kind: :bad_habit,
-                                                    description: 'Keeping Dad waiting.')
-            .update(point_value: -5)
+                                                    name: 'Keeping Dad waiting.',
+                                                    show_success_button: false,
+                                                    show_pass_button: false,
+                                                    show_fail_button: true,
+                                                    point_value: -5)
 
   child_user.happening_templates.find_or_create_by!(kind: :bad_habit,
-                                                    description: 'Distracting others while working on chores.')
-            .update(point_value: -5)
+                                                    name: 'Distracting others while working on chores.',
+                                                    show_success_button: false,
+                                                    show_pass_button: false,
+                                                    show_fail_button: true,
+                                                    point_value: -5)
 end
 
 User.where(display_name: ['Max', 'Sam']).each do |child_user|
   child_user.happening_templates
             .find_or_create_by!(kind: :bad_habit,
-                                description: 'Leaving a trail')
-            .update!(point_value: -10)
+                                name: 'Leaving a trail',
+                                show_success_button: false,
+                                show_pass_button: false,
+                                show_fail_button: true,
+                                point_value: -10)
   child_user.happening_templates
             .find_or_create_by!(kind: :bad_habit,
-                                description: 'Saying something is done that is not done')
-            .update(point_value: -20)
+                                name: 'Saying something is done that is not done',
+                                show_success_button: false,
+                                show_pass_button: false,
+                                show_fail_button: true,
+                                point_value: -20)
 end
 
 User.find_by(display_name: 'Max').happening_templates
     .find_or_create_by!(kind: :bad_habit,
-                        description: 'Garbage left in a bad state.').update(point_value: -20)
+                        name: 'Garbage left in a bad state.',
+                        show_success_button: false,
+                        show_pass_button: false,
+                        show_fail_button: true,
+                        point_value: -20)
 
 User.find_by(display_name: 'Sam').happening_templates
     .find_or_create_by!(kind: :bad_habit,
-                        description: 'Saying something is done that is not done').update(point_value: -20)
+                        name: 'Saying something is done that is not done',
+                        show_success_button: false,
+                        show_pass_button: false,
+                        show_fail_button: true,
+                        point_value: -20)
 
 User.find_by(display_name: 'Sam').happening_templates
     .find_or_create_by!(kind: :bad_habit,
-                        description: 'Getting distracted while working on chores.').update(point_value: -5)
+                        name: 'Getting distracted while working on chores.',
+                        show_success_button: false,
+                        show_pass_button: false,
+                        show_fail_button: true,
+                        point_value: -5)
 
 User.find_by(display_name: 'Finn').happening_templates
     .find_or_create_by!(kind: :pass_fail_habit,
-                        description: 'Cleaning up quickly at cleanup time').update(point_value: 5)
+                        name: 'Cleaning up quickly at cleanup time',
+                        show_success_button: false,
+                        show_pass_button: false,
+                        show_fail_button: true,
+                        point_value: 5)
 
 # User.where(display_name: 'TestChild').destroy_all
 # test_child = User.create!({ display_name: 'TestChild',
@@ -150,9 +212,9 @@ User.find_by(display_name: 'Finn').happening_templates
 # test_child.happenings.create!(reporting_user: test_child,
 #                               kind: :good_habit,
 #                               point_value: 5,
-#                               description: 'i am a happening description')
+#                               name: 'i am a happening name')
 # happening_template = HappeningTemplate.where(kind: :good_habit,
 #                                              point_value: 5).first_or_create!
-# happening_template.description ||= 'remembered to wash hands before eating'
+# happening_template.name ||= 'remembered to wash hands before eating'
 # happening_template.save!
 # happening_template.users << test_child

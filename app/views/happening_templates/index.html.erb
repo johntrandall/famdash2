@@ -3,13 +3,16 @@
     <% @happening_templates.each do |template| %>
       <% if template.separator? %>
         <tr>
-          <td colspan="0"><em>---<%= template.description %></em>---</td>
+          <td colspan="0">
+            <br>
+            <em>---<%= template.name %></em>---
+          </td>
         </tr>
       <% end %>
 
       <tr>
         <%= simple_form_for template do |f| %>
-          <td><%= f.input :description %></td>
+          <td><%= f.input :name %></td>
           <td><%= f.select :kind, HappeningTemplate.kinds.keys %></td>
           <td><%= f.input :point_value %></td>
           <td><%= f.submit 'Save' %>

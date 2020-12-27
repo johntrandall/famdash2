@@ -2,9 +2,41 @@
   <% selected_user.happening_templates.active.each do |template| %>
     <% if template.separator? %>
       <br>
-      <u style="text-decoration: underline"><%= template.description.titleize %></u>
+      <u style="text-decoration: underline"><%= template.name.titleize %></u>
     <% else %>
-      <%= render "#{template.kind}_button", template: template %>
+      <div>
+        <%= template.name %>
+        <%= template.description %>
+
+        <% if template.show_success_button %>
+          <%= button_to happenings_path, method: :post, params: { template_id: template,
+                                                                  selected_user_id: selected_user.id,
+                                                                  reporting_user_id: current_user.id,
+                                                                  event_kind: :habit_success } do %>
+            Success +<%= template.point_value %>
+          <% end %>
+        <% end %>
+
+        <% if template.show_pass_button %>
+          <%= button_to happenings_path, method: :post, params: { template_id: template,
+                                                                  selected_user_id: selected_user.id,
+                                                                  reporting_user_id: current_user.id,
+                                                                  event_kind: :habit_pass },
+                        disabled: current_user.child? do %>
+            Pass
+          <% end %>
+        <% end %>
+
+        <% if template.show_fail_button %>
+          <%= button_to happenings_path, method: :post, params: { template_id: template,
+                                                                  selected_user_id: selected_user.id,
+                                                                  reporting_user_id: current_user.id,
+                                                                  event_kind: :habit_fail } do %>
+            Fail -<%= template.point_value %>
+          <% end %>
+        <% end %>
+      </div>
+
       <br><br>
     <% end %>
   <% end %>

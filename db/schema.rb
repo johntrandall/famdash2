@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_23_072047) do
+ActiveRecord::Schema.define(version: 2020_12_27_052129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,10 @@ ActiveRecord::Schema.define(version: 2020_12_23_072047) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "position"
+    t.string "name"
+    t.boolean "show_success_button", default: true
+    t.boolean "show_pass_button", default: false
+    t.boolean "show_fail_button", default: false
     t.index ["user_id"], name: "index_happening_templates_on_user_id"
   end
 
@@ -43,6 +47,7 @@ ActiveRecord::Schema.define(version: 2020_12_23_072047) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "reporting_user_id"
+    t.string "name"
     t.index ["reporting_user_id"], name: "index_happenings_on_reporting_user_id"
     t.index ["user_id"], name: "index_happenings_on_user_id"
   end
