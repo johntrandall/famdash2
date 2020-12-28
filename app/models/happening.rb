@@ -9,9 +9,10 @@ end
 #
 #  id                :bigint           not null, primary key
 #  description       :string
-#  kind              :string
+#  event_kind        :string
 #  name              :string
 #  point_value       :integer
+#  template_kind     :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  reporting_user_id :bigint
