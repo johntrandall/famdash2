@@ -1,13 +1,11 @@
 <% if current_user && selected_user %>
-  <header>
-    <h2>
-      <%= selected_user.display_name %> <small>(<%= selected_user.role %>)</small>
-    </h2>
-  </header>
-
   <% if selected_user.child? %>
-    <%= render 'habit_log' %>
+    <section>
+      <%= render 'habit_log' %>
+    </section>
     <hr>
-    <%= render 'habit_entry' %>
+    <section>
+      <%= render 'habit_entry' %>
+    </section>
   <% end %>
 <% end %>

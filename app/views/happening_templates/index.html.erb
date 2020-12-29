@@ -1,11 +1,16 @@
+<h1>
+  Habit templates
+</h1>
+
 <% if current_user && selected_user %>
-  <table>
+  <table class="table">
+    <tbody>
     <% @happening_templates.each do |template| %>
       <% if template.separator? %>
         <tr>
           <td colspan="0">
             <br>
-            <em>---<%= template.name %></em>---
+            <h3 style="text-decoration: underline"><%= template.name %></h3>
           </td>
         </tr>
       <% end %>
@@ -25,5 +30,6 @@
         <td><%= button_to 'down', sort_down_happening_template_path(template), method: :patch %></td>
       </tr>
     <% end %>
+    </tbody>
   </table>
 <% end %>
