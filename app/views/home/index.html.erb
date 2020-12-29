@@ -3,9 +3,9 @@
     <section>
       <header>
         <h2>Habit Reporting</h2>
-        <h4 style="display:inline">Score: <%= selected_user.good_habit_score %></h4>
-        <small>(Keep this above 100 to unlock screentime)</small>
+        <%= render 'happenings/habit_scores' %>
       </header>
+      <br>
 
       <div class="row">
         <% selected_user.happening_templates.active.each do |template| %>

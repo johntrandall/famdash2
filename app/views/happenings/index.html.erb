@@ -2,8 +2,7 @@
   <% if selected_user.child? %>
     <header>
       <h2>Habit Log</h2>
-      <h4 style="display:inline" class="text-primary">Score: <%= selected_user.good_habit_score %></h4>
-      <small>(Keep this above 100 to unlock screentime)</small>
+      <%= render 'habit_scores' %>
     </header>
     </br>
     </br>

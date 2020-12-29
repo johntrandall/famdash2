@@ -1,6 +1,10 @@
 class Happening < ApplicationRecord
   belongs_to :user
   belongs_to :reporting_user, class_name: User.to_s, optional: true
+
+  enum event_kind: { habit_success: 'habit_success',
+                     habit_pair: 'habit_pair',
+                     habit_fail: 'habit_fail'}
 end
 
 # == Schema Information
