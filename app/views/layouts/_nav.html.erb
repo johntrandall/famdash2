@@ -1,38 +1,56 @@
 <header>
-  Pick current user:
-  <ul>
+  <ul class="nav nav-pills">
+    <li class="nav-item nav-link">Log in as:</li>
     <% User.all.each do |user| %>
-      <li>
-        <%= button_to user.display_name, current_user_path, method: :patch, params: { id: user.id } %> <%= 'LOGGED IN' if current_user == user %>
+      <li class="nav-item">
+        <%= link_to user.display_name,
+                    current_user_path(id: user.id),
+                    method: :patch,
+                    class: "nav-link #{ 'active' if current_user == user}" %>
       </li>
     <% end %>
   </ul>
+  <hr>
 
-  Dashboard for:
-  <ul>
-    <% User.all.each do |user| %>
-      <li>
-        <%= button_to user.display_name, selected_user_path, method: :patch, params: { id: user.id } %> <%= 'SELECTED' if selected_user == user %>
+  <ul class="nav nav-tabs">
+    <li class="nav-item nav-link">Data for:</li>
+    <% User.where(display_name: 'Max').each do |user| %>
+      <li class="nav-item">
+        <%= link_to user.display_name,
+                    selected_user_path(id: user.id),
+                    method: :patch,
+                    class: "nav-link #{ 'active' if selected_user == user }" %>
       </li>
     <% end %>
   </ul>
+  <p>
+    <% if !current_user %>
+      Identify yourself above
+    <% end %>
 
-  <% if !current_user %>
-    Identify yourself above
-  <% end %>
+    <% if !selected_user %>
+      Select a user above to view that user's dashboard
+    <% end %>
+  </p>
 
-  <% if !selected_user %>
-    Select a user above to view that user's dashboard
-  <% end %>
 
-  <nav>
-    <ul>
-      <li>
-        <%= link_to 'home', home_index_path %>
-      </li>
-      <li>
-        <%= link_to 'setup chores', happening_templates_path %>
-      </li>
-    </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to 'Habits', home_index_path, class: "nav-link #{ 'active' if controller.is_a? HomeController }" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Habit Log', happenings_path, class: "nav-link #{ 'active' if controller.is_a? HappeningsController }" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Habit Setup', happening_templates_path, class: "nav-link #{ 'active' if controller.is_a? HappeningTemplatesController }" %>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
 </header>
+
+<br>

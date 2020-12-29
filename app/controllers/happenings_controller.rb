@@ -1,4 +1,9 @@
 class HappeningsController < ApplicationController
+
+  def index
+
+  end
+
   def create
     reporting_user = User.find(happening_params[:reporting_user_id])
     reportee_user = User.find(happening_params[:selected_user_id])
