@@ -7,48 +7,64 @@
         <small>(Keep this above 100 to unlock screentime)</small>
       </header>
 
-      <% selected_user.happening_templates.active.each do |template| %>
-        <% if template.separator? %>
-          <br>
-          <h3 style="text-decoration: underline"><%= template.name.titleize %></h3>
-        <% else %>
-          <div>
-            <%= template.name %>
-            <%= template.description %>
+      <div class="row">
+        <% selected_user.happening_templates.active.each do |template| %>
 
-            <% if template.show_success_button %>
-              <%= button_to happenings_path, method: :post, params: { template_id: template,
-                                                                      selected_user_id: selected_user.id,
-                                                                      reporting_user_id: current_user.id,
-                                                                      event_kind: :habit_success } do %>
-                Success +<%= template.point_value %>
-              <% end %>
-            <% end %>
+          <% if template.separator? %>
+            <div class="col-12">
+              <h3 style="text-decoration: underline"><%= template.name.titleize %></h3>
+            </div>
+          <% else %>
+            <div class="col-sm-3">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h6 class="card-title"><%= template.name %></h6>
+                  <p class="card-text"><%= template.description %></p>
+                  <% if template.show_success_button %>
+                    <%= button_to happenings_path,
+                                  method: :post,
+                                  params: { template_id: template,
+                                            selected_user_id: selected_user.id,
+                                            reporting_user_id: current_user.id,
+                                            event_kind: :habit_success },
+                                  form_class: 'd-inline',
+                                  class: 'btn btn-success d-inline' do %>
+                      Success +<%= template.point_value %>
+                    <% end %>
+                  <% end %>
 
-            <% if template.show_pass_button %>
-              <%= button_to happenings_path, method: :post, params: { template_id: template,
-                                                                      selected_user_id: selected_user.id,
-                                                                      reporting_user_id: current_user.id,
-                                                                      event_kind: :habit_pass },
-                            disabled: current_user.child? do %>
-                Pass
-              <% end %>
-            <% end %>
+                  <% if template.show_pass_button %>
+                    <%= button_to happenings_path,
+                                  method: :post,
+                                  params: { template_id: template,
+                                            selected_user_id: selected_user.id,
+                                            reporting_user_id: current_user.id,
+                                            event_kind: :habit_pass },
+                                  disabled: current_user.child?,
+                                  form_class: 'd-inline',
+                                  class: 'btn btn-warning d-inline' do %>
+                      Pass
+                    <% end %>
+                  <% end %>
 
-            <% if template.show_fail_button %>
-              <%= button_to happenings_path, method: :post, params: { template_id: template,
-                                                                      selected_user_id: selected_user.id,
-                                                                      reporting_user_id: current_user.id,
-                                                                      event_kind: :habit_fail } do %>
-                Fail -<%= template.point_value %>
-              <% end %>
-            <% end %>
-          </div>
-
-          <br><br>
+                  <% if template.show_fail_button %>
+                    <%= button_to happenings_path,
+                                  method: :post,
+                                  params: { template_id: template,
+                                            selected_user_id: selected_user.id,
+                                            reporting_user_id: current_user.id,
+                                            event_kind: :habit_fail },
+                                  form_class: 'd-inline',
+                                  class: 'btn btn-danger d-inline' do %>
+                      Fail -<%= template.point_value %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-
+      </div>
     </section>
   <% end %>
 <% end %>
