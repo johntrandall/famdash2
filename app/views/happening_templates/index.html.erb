@@ -15,6 +15,9 @@
           <td><%= f.input :name %></td>
           <td><%= f.select :kind, HappeningTemplate.kinds.keys %></td>
           <td><%= f.input :point_value %></td>
+          <td><%= f.input :show_success_button %></td>
+          <td><%= f.input :show_pass_button %></td>
+          <td><%= f.input :show_fail_button %></td>
           <td><%= f.submit 'Save' %>
         <% end %>
         <td>&nbsp; &nbsp; &nbsp; sort:</td>
