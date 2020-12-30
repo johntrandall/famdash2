@@ -34,16 +34,17 @@
                   <% end %>
 
                   <% if template.show_pass_button %>
+                    <% disabled = current_user.child? %>
                     <%= button_to happenings_path,
                                   method: :post,
                                   params: { template_id: template,
                                             selected_user_id: selected_user.id,
                                             reporting_user_id: current_user.id,
                                             event_kind: :habit_pass },
-                                  disabled: current_user.child?,
+                                  disabled: disabled,
                                   form_class: 'd-inline',
-                                  class: 'btn btn-warning d-inline' do %>
-                      Pass
+                                  class: "btn #{disabled ? 'btn-outline-warning' : 'btn-warning'} d-inline " do %>
+                      Skip
                     <% end %>
                   <% end %>
 
