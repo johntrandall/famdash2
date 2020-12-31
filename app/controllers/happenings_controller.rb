@@ -14,6 +14,7 @@ class HappeningsController < ApplicationController
     Happening.create!(user: reportee_user,
                       reporting_user: reporting_user,
                       event_kind: event_kind,
+                      happening_template: happening_template,
                       **happening_template.attributes.except('id',
                                                              'kind',
                                                              'created_at',
