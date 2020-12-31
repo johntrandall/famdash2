@@ -13,19 +13,21 @@ end
 #
 # Table name: happenings
 #
-#  id                :bigint           not null, primary key
-#  description       :string
-#  event_kind        :string
-#  name              :string
-#  point_value       :integer
-#  template_kind     :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  reporting_user_id :bigint
-#  user_id           :bigint
+#  id                    :bigint           not null, primary key
+#  description           :string
+#  event_kind            :string
+#  name                  :string
+#  point_value           :integer
+#  template_kind         :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  happening_template_id :bigint
+#  reporting_user_id     :bigint
+#  user_id               :bigint
 #
 # Indexes
 #
-#  index_happenings_on_reporting_user_id  (reporting_user_id)
-#  index_happenings_on_user_id            (user_id)
+#  index_happenings_on_happening_template_id  (happening_template_id)
+#  index_happenings_on_reporting_user_id      (reporting_user_id)
+#  index_happenings_on_user_id                (user_id)
 #

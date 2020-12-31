@@ -60,6 +60,20 @@
                       Fail -<%= template.point_value %>
                     <% end %>
                   <% end %>
+
+                  <p class="text-end">
+                    <% case template.streak_kind %>
+                    <% when :habit_success %>
+                      <br>
+                      <%= "Daily Success Streak!" %>
+                      <span class="badge bg-success"><%= template.streak_count %></span>
+                    <% when :habit_fail %>
+                      <br>
+                      <%= "Daily Fails Streak!" %>
+                      <span class="badge bg-danger"><%= template.streak_count %></span>
+                    <% end %>
+                  </p>
+
                 </div>
               </div>
             </div>
