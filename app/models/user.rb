@@ -21,14 +21,14 @@ class User < ApplicationRecord
 
   def create_happening_to_decay_habit_success_score!
     happenings.create!(description: 'overnight decay (third)',
-                       event_kind: 'habit_success',
+                       event_kind: :habit_success,
                        point_value: -1 * (good_habit_score / 3))
   end
 
   def create_happening_to_decay_habit_fail_score!
     happenings.create!(description: 'overnight decay (half)',
-                       event_kind: 'habit_fail',
-                       point_value: -1 * (good_habit_score / 2))
+                       event_kind: :habit_fail,
+                       point_value: -1 * (bad_habit_score / 2))
   end
 end
 
