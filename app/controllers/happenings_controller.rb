@@ -23,7 +23,8 @@ class HappeningsController < ApplicationController
                                                              'show_success_button',
                                                              'show_pass_button',
                                                              'show_fail_button',
-                                                             'user_id')
+                                                             'user_id',
+                                                             'allowed_entries_daily_count')
     )
 
     redirect_back fallback_location: root_path

@@ -26,6 +26,16 @@ class HappeningTemplate < ApplicationRecord
     end
   end
 
+  def enable_card?
+    return true if (allowed_entries_daily_count.nil? || allowed_entries_daily_count.zero?)
+
+    entries_today = user.happenings
+                        .where(happening_template: self,
+                               created_at: DateTime.current.in_time_zone("America/New_York").beginning_of_day...DateTime.current.in_time_zone("America/New_York").end_of_day)
+                        .count
+    entries_today < allowed_entries_daily_count
+  end
+
   # def success_streak
   #   return unless happenings.order(:created_at, :desc).first.entry_kind == habit_success
   #
@@ -49,18 +59,19 @@ end
 #
 # Table name: happening_templates
 #
-#  id                  :bigint           not null, primary key
-#  description         :string
-#  kind                :string
-#  name                :string
-#  point_value         :integer
-#  position            :integer
-#  show_fail_button    :boolean          default(FALSE)
-#  show_pass_button    :boolean          default(FALSE)
-#  show_success_button :boolean          default(TRUE)
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  user_id             :bigint
+#  id                          :bigint           not null, primary key
+#  allowed_entries_daily_count :integer
+#  description                 :string
+#  kind                        :string
+#  name                        :string
+#  point_value                 :integer
+#  position                    :integer
+#  show_fail_button            :boolean          default(FALSE)
+#  show_pass_button            :boolean          default(FALSE)
+#  show_success_button         :boolean          default(TRUE)
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  user_id                     :bigint
 #
 # Indexes
 #

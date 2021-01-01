@@ -14,6 +14,7 @@ describe Happening::OvernightExponentialDecayService do
         Happening::OvernightExponentialDecayService.run_all
       end
     end
+
     context 'within allow hour' do
       before { stub_const('Happening::OvernightExponentialDecayService::ALLOW_HOUR', (DateTime.current.in_time_zone("America/New_York").hour)) }
       it 'calls for Max' do
