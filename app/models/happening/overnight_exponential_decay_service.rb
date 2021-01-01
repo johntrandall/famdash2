@@ -1,8 +1,10 @@
 class Happening
   class OvernightExponentialDecayService
+    ALLOW_HOUR = 1
+
     def self.run_all
       date_time = DateTime.current.in_time_zone("America/New_York")
-      if date_time.hour == 1
+      if date_time.hour == ALLOW_HOUR
         User.where(display_name: 'Max').each do |user|
           new.call(user)
         end
