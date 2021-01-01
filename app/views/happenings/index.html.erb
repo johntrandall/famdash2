@@ -10,9 +10,8 @@
       <span style="text-decoration: underline "><%= group.first %></span>
       <% group.second.each do |happening| %>
         <div>
-          <%= happening.name %> <%= happening.point_value > 0 ? "+" : '' %> <%= happening.point_value %> <%= happening.event_kind %>
-          <small>(reported by <%= happening.reporting_user&.display_name %>
-            at <%= happening.created_at.strftime("%H:%M") %>)</small>
+          <%= happening.event_kind %> <%= happening.name %> <%= happening.point_value %>
+          <small>(reported by <%= happening.reporting_user&.display_name %> at <%= happening.created_at.strftime("%H:%M") %>)</small>
         </div>
       <% end %>
     <% end %>
