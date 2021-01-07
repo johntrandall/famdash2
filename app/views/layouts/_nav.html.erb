@@ -42,7 +42,14 @@
             <%= link_to 'Habits', home_index_path, class: "nav-link #{ 'active' if controller.is_a? HomeController }" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Habit Log', happenings_path, class: "nav-link #{ 'active' if controller.is_a? HappeningsController }" %>
+            <%= link_to 'Habit Log',
+                        happenings_path,
+                        class: "nav-link #{ 'active' if controller.is_a?(HappeningsController) && action_name == 'index'}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Habit Grid Index',
+                        grid_index_happenings_path,
+                        class: "nav-link #{ 'active' if controller.is_a?(HappeningsController) && action_name == 'grid_index'}" %>
           </li>
           <li class="nav-item">
             <%= link_to 'Habit Setup', happening_templates_path, class: "nav-link #{ 'active' if controller.is_a? HappeningTemplatesController }" %>

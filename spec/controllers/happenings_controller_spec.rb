@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 describe HappeningsController do
+  describe '#index' do
+    it 'works' do
+      get :index
+      expect(response).to be_successful
+    end
+  end
+
+  describe '#grid_index' do
+    it 'works' do
+      get :grid_index
+      expect(response).to be_successful
+    end
+  end
+
   describe '#create' do
     subject do
       # template.users << reportee_user
