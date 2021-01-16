@@ -4,7 +4,7 @@ class HappeningsController < ApplicationController
   end
 
   def grid_index
-    @grid = HappeningsGrid.new(grid_params) do |scope|
+    @grid = HappeningsGrid.new({order: :created_at, descending: true}.merge(grid_params)) do |scope|
       scope.page(params[:page])
     end
 
