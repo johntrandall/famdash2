@@ -45,8 +45,9 @@ describe HappeningsController do
   end
 
   describe '#edit' do
+    let(:happening) { Happening.create! }
     it 'works' do
-      get :edit, params: {"id"=>"69"}
+      get :edit, params: { id: happening.id }
       expect(response).to be_successful
     end
   end
