@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resource :current_user, only: :update
   resource :selected_user, only: :update
-  resources :happenings, only: [:index, :create] do
+  resources :happenings, only: [:index, :create, :edit, :update] do
     collection do
       get :grid_index
     end
