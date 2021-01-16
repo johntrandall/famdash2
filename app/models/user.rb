@@ -7,12 +7,6 @@ class User < ApplicationRecord
 
   enum role: { child: 'child', caretaker: 'caretaker' }
 
-  def self.decay_good_habit_scores!
-    User.child.each do |child|
-      child.decay_good_habit_score!
-    end
-  end
-
   def name
     display_name
   end
@@ -25,12 +19,17 @@ class User < ApplicationRecord
     happenings.habit_fail.sum(:point_value)
   end
 
+  def create_happening_to_decay_habit_success_score!
+    happenings.create!(description: 'overnight decay (third)',
+                       event_kind: :habit_success,
+                       point_value: -1 * (good_habit_score / 3))
+  end
 
-  # def decay_good_habit_score!
-  #   happenings.create!(description: 'overnight decay',
-  #                      point_value: -1 * (good_habit_score / 2))
-  # end
-
+  def create_happening_to_decay_habit_fail_score!
+    happenings.create!(description: 'overnight decay (half)',
+                       event_kind: :habit_fail,
+                       point_value: -1 * (bad_habit_score / 2))
+  end
 end
 
 # == Schema Information

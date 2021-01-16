@@ -5,14 +5,13 @@
       <%= render 'habit_scores' %>
     </header>
     </br>
-    </br>
     <% selected_user.happenings.group_by_day(&:created_at).each do |group| %>
+    </br>
       <span style="text-decoration: underline "><%= group.first %></span>
       <% group.second.each do |happening| %>
         <div>
-          <%= happening.name %> <%= happening.point_value > 0 ? "+" : '' %> <%= happening.point_value %> <%= happening.event_kind %>
-          <small>(reported by <%= happening.reporting_user&.display_name %>
-            at <%= happening.created_at.strftime("%H:%M") %>)</small>
+          <%= happening.event_kind %> <%= happening.name %> <%= happening.point_value %>
+          <small>(reported by <%= happening.reporting_user&.display_name %> at <%= happening.created_at.strftime("%H:%M") %>)</small>
         </div>
       <% end %>
     <% end %>

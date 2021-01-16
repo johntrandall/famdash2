@@ -1,6 +1,12 @@
 class HappeningsController < ApplicationController
 
   def index
+  end
+
+  def grid_index
+    @grid = HappeningsGrid.new({order: :created_at, descending: true}.merge(grid_params)) do |scope|
+      scope.page(params[:page])
+    end
 
   end
 
@@ -23,16 +29,23 @@ class HappeningsController < ApplicationController
                                                              'show_success_button',
                                                              'show_pass_button',
                                                              'show_fail_button',
-                                                             'user_id')
+                                                             'user_id',
+                                                             'allowed_entries_daily_count')
     )
 
     redirect_back fallback_location: root_path
   end
+
+  protected
 
   def happening_params
     params.permit(:selected_user_id,
                   :reporting_user_id,
                   :template_id,
                   :event_kind)
+  end
+
+  def grid_params
+    params.fetch(:happenings_grid, {}).permit!
   end
 end

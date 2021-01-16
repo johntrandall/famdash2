@@ -1,7 +1,7 @@
 class Happening < ApplicationRecord
   belongs_to :user
   belongs_to :reporting_user, class_name: User.to_s, optional: true
-  belongs_to :happening_template
+  belongs_to :happening_template, optional: true
 
   enum event_kind: { habit_success: 'habit_success',
                      habit_pair: 'habit_pair',
@@ -17,7 +17,6 @@ end
 #  event_kind            :string
 #  name                  :string
 #  point_value           :integer
-#  template_kind         :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  happening_template_id :bigint

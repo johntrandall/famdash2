@@ -18,7 +18,6 @@ end
 #  event_kind            :string
 #  name                  :string
 #  point_value           :integer
-#  template_kind         :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  happening_template_id :bigint
