@@ -15,4 +15,7 @@ class HappeningsGrid < BaseGrid
   column(:point_value)
   column(:happening_template_id, :header => "Template ID")
   column(:happening_template, :header => "Template Name") { |temp| temp.name }
+  column(:id) do |happening|
+    ActionController::Base.helpers.link_to('edit', Rails.application.routes.url_helpers.edit_happening_path(happening))
+  end
 end

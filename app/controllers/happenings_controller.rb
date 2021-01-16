@@ -4,18 +4,18 @@ class HappeningsController < ApplicationController
   end
 
   def grid_index
-    @grid = HappeningsGrid.new({order: :created_at, descending: true}.merge(grid_params)) do |scope|
+    @grid = HappeningsGrid.new({ order: :created_at, descending: true }.merge(grid_params)) do |scope|
       scope.page(params[:page])
     end
 
   end
 
   def create
-    reporting_user = User.find(happening_params[:reporting_user_id])
-    reportee_user = User.find(happening_params[:selected_user_id])
+    reporting_user = User.find(happening_params_old[:reporting_user_id])
+    reportee_user = User.find(happening_params_old[:selected_user_id])
 
-    happening_template = reportee_user.happening_templates.find(happening_params[:template_id])
-    event_kind = happening_params[:event_kind]
+    happening_template = reportee_user.happening_templates.find(happening_params_old[:template_id])
+    event_kind = happening_params_old[:event_kind]
 
     Happening.create!(user: reportee_user,
                       reporting_user: reporting_user,
@@ -36,13 +36,37 @@ class HappeningsController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
+  def edit
+    @happening = Happening.find(params[:id])
+  end
+
+  def update
+    @happening = Happening.find(params[:id])
+    @happening.update!(happening_params)
+
+    flash[:success] = 'saved'
+    redirect_back(fallback_location: edit_happening_path(@happening))
+  end
+
   protected
 
-  def happening_params
+  def happening_params_old
     params.permit(:selected_user_id,
                   :reporting_user_id,
                   :template_id,
                   :event_kind)
+
+  end
+
+  def happening_params
+    params.require(:happening).permit(:selected_user_id,
+                                      :reporting_user_id,
+                                      :template_id,
+                                      :event_kind,
+                                      :name,
+                                      :description,
+                                      :point_value,
+    )
   end
 
   def grid_params

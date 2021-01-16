@@ -43,4 +43,12 @@ describe HappeningsController do
       expect(Happening.last.user).to eq reportee_user
     end
   end
+
+  describe '#edit' do
+    let(:happening) { Happening.create!(user: User.create!(display_name:'derp')) }
+    it 'works' do
+      get :edit, params: { id: happening.id }
+      expect(response).to be_successful
+    end
+  end
 end
