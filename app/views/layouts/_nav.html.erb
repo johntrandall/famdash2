@@ -42,7 +42,7 @@
             <%= link_to 'Habits', home_index_path, class: "nav-link #{ 'active' if controller.is_a? HomeController }" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Habit Log',
+            <%= link_to 'Habit Log index',
                         happenings_path,
                         class: "nav-link #{ 'active' if controller.is_a?(HappeningsController) && action_name == 'index'}" %>
           </li>
