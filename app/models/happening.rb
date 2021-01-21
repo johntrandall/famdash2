@@ -5,7 +5,9 @@ class Happening < ApplicationRecord
 
   enum event_kind: { habit_success: 'habit_success',
                      habit_pair: 'habit_pair',
-                     habit_fail: 'habit_fail'}
+                     habit_fail: 'habit_fail' }
+
+  scope :not_decay, -> { where(decay_event: [false, nil]) }
 end
 
 # == Schema Information
