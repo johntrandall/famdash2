@@ -19,16 +19,18 @@ class User < ApplicationRecord
     happenings.habit_fail.sum(:point_value)
   end
 
-  def create_happening_to_decay_habit_success_score!
-    happenings.create!(description: 'overnight decay (third)',
-                       event_kind: :habit_success,
-                       point_value: -1 * (good_habit_score / 3))
+  def create_happening_to_decay_habit_success_score!(date:)
+
   end
 
-  def create_happening_to_decay_habit_fail_score!
-    happenings.create!(description: 'overnight decay (half)',
-                       event_kind: :habit_fail,
-                       point_value: -1 * (bad_habit_score / 2))
+  def create_happening_to_decay_habit_fail_score!(date:)
+    score_to_date = happenings.where(event_kind: :habit_fail, reported_at: [...date.beginning_of_day]).sum(:point_value)
+    score_change = -1 * (score_to_date / 3)
+    if score_change.nonzero?
+      happenings.create!(description: 'overnight decay (1/2)',
+                         event_kind: :habit_fail,
+                         point_value: score_change)
+    end
   end
 end
 

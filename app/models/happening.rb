@@ -13,10 +13,12 @@ end
 # Table name: happenings
 #
 #  id                    :bigint           not null, primary key
+#  decay_event           :boolean
 #  description           :string
 #  event_kind            :string
 #  name                  :string
 #  point_value           :integer
+#  reported_at           :datetime
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  happening_template_id :bigint
