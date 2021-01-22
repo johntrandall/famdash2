@@ -14,43 +14,47 @@ class HappeningTemplate < ApplicationRecord
     @streak_kind ||= happenings.order(reported_at: :desc).first&.event_kind&.to_sym
   end
 
-  # def streak_count(count: 1, occurrence_date: Time.current)
-  #   current_streak_kind = current_streak_kind
-  #   return 0 unless 'all todays happenings match current kind'
-  #   return 0 unless 'all yesterdays happenings match current kind'
-  #
-  #   happened_today = happenings.send(current_streak_kind).maximum(:reported_at)
-  #   count = 1 if happened_today
-  #
-  #   prior_date = occurrence_date - 1.day
-  #   range = (prior_date).beginning_of_day...(prior_date).end_of_day
-  #
-  #   if happenings.send(current_streak_kind).where(reported_at: range).present?
-  #     count += 1
-  #     streak_count(count: count, occurrence_date: prior_date)
-  #   else
-  #     return count
-  #   end
-  # end
-  #
   def streak_count
-    success_count
+    case current_streak_kind
+      when :habit_success
+        success_streak_count
+      when :habit_fail
+        fail_streak_count
+    end
 
   end
 
-  def success_count(count: 0, day_range: nil)
+  def success_streak_count(count: 0, day_range: nil)
     return 0 if happenings.not_decay.order(reported_at: :desc).first.habit_fail?
 
     count = 0
     (0..4).uniq.each do |num|
       day_range = (Time.current - num.day).beginning_of_day..(Time.current - num.day).end_of_day
       day_happenings = happenings.not_decay.where(reported_at: day_range)
-      day_successes = day_happenings.habit_success
-      day_fails = day_happenings.habit_fail
-      count += 1 if (day_fails.empty? && day_successes.exists?)
-      return count if (day_fails.exists? && day_successes.empty?)
-      return count if day_fails.exists? && day_successes.exists? && day_successes.maximum(:reported_at) < day_fails.maximum(:reported_at)
-      return count += 1 if day_fails.exists? && day_successes.exists? && day_successes.maximum(:reported_at) > day_fails.maximum(:reported_at)
+      habits_to_quantify = day_happenings.habit_success
+      habits_to_break_streak = day_happenings.habit_fail
+      count += 1 if (habits_to_break_streak.empty? && habits_to_quantify.exists?)
+      return count if (habits_to_break_streak.exists? && habits_to_quantify.empty?)
+      return count if habits_to_break_streak.exists? && habits_to_quantify.exists? && habits_to_quantify.maximum(:reported_at) < habits_to_break_streak.maximum(:reported_at)
+      return count += 1 if habits_to_break_streak.exists? && habits_to_quantify.exists? && habits_to_quantify.maximum(:reported_at) > habits_to_break_streak.maximum(:reported_at)
+    end
+
+    return count
+  end
+
+  def fail_streak_count(count: 0, day_range: nil)
+    return 0 if happenings.not_decay.order(reported_at: :desc).first.habit_success?
+
+    count = 0
+    (0..4).uniq.each do |num|
+      day_range = (Time.current - num.day).beginning_of_day..(Time.current - num.day).end_of_day
+      day_happenings = happenings.not_decay.where(reported_at: day_range)
+      habits_to_quantify = day_happenings.habit_fail
+      habits_to_break_streak = day_happenings.habit_success
+      count += 1 if (habits_to_break_streak.empty? && habits_to_quantify.exists?)
+      return count if (habits_to_break_streak.exists? && habits_to_quantify.empty?)
+      return count if habits_to_break_streak.exists? && habits_to_quantify.exists? && habits_to_quantify.maximum(:reported_at) < habits_to_break_streak.maximum(:reported_at)
+      return count += 1 if habits_to_break_streak.exists? && habits_to_quantify.exists? && habits_to_quantify.maximum(:reported_at) > habits_to_break_streak.maximum(:reported_at)
     end
 
     return count

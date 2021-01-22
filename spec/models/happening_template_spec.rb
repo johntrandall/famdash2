@@ -21,7 +21,7 @@ RSpec.describe HappeningTemplate do
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: 3.days.ago)
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: 2.days.ago)
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: 1.day.ago)
-        expect(template.success_count).to eq 4
+        expect(template.success_streak_count).to eq 4
       end
 
       it 'includes today in count' do
@@ -30,7 +30,7 @@ RSpec.describe HappeningTemplate do
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: 2.days.ago)
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: 1.day.ago)
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: Time.current)
-        expect(template.success_count).to eq 5
+        expect(template.success_streak_count).to eq 5
       end
 
       it 'does not double count two successes in the same day' do
@@ -38,7 +38,7 @@ RSpec.describe HappeningTemplate do
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: 2.days.ago)
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: 2.day.ago)
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: 1.day.ago)
-        expect(template.success_count).to eq 3
+        expect(template.success_streak_count).to eq 3
       end
     end
 
@@ -48,7 +48,7 @@ RSpec.describe HappeningTemplate do
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: 2.days.ago)
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_fail, user: user, reported_at: 1.day.ago)
 
-        expect(template.success_count).to eq 0
+        expect(template.success_streak_count).to eq 0
       end
 
       it 'returns 1 if streak is broken by fail yesterday, but one success today' do
@@ -56,7 +56,7 @@ RSpec.describe HappeningTemplate do
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_fail, user: user, reported_at: 1.day.ago)
         Happening.create(name: 'streaker', happening_template: template, event_kind: :habit_success, user: user, reported_at: Time.current)
 
-        expect(template.success_count).to eq 1
+        expect(template.success_streak_count).to eq 1
       end
     end
   end
