@@ -47,59 +47,88 @@ class HappeningTemplate < ApplicationRecord
     day_happenings = happenings.not_decay.where(reported_at: day_range)
     day_successes = day_happenings.habit_success
     day_fails = day_happenings.habit_fail
-    if day_fails.exists?
-      day_successes = day_successes.where(reported_at: day_fails.maximum(:reported_at))
+    if (day_fails.exists? && day_successes.empty?)
+      return count
     end
-    if day_successes.exists?
-      count += 1
+    if (day_fails.empty? && day_successes.exists?)
+      count+=1
+    end
+    if day_fails.exists? && day_successes.exists?
+      if day_successes.maximum(:reported_at) > day_fails.maximum(:reported_at)
+        count+=1
+        return count
+      end
     end
 
     day_range = (Time.current - 1.day).beginning_of_day..(Time.current - 1.day).end_of_day
     day_happenings = happenings.not_decay.where(reported_at: day_range)
     day_successes = day_happenings.habit_success
     day_fails = day_happenings.habit_fail
-    if day_fails.exists?
-      raise 'rough edge'
-      day_successes = day_successes.where(reported_at: day_fails.maximum(:reported_at))
+    if (day_fails.exists? && day_successes.empty?)
+      return count
     end
-    if day_successes.exists?
-      count += 1
+    if (day_fails.empty? && day_successes.exists?)
+      count+=1
     end
+    if day_fails.exists? && day_successes.exists?
+      if day_successes.maximum(:reported_at) > day_fails.maximum(:reported_at)
+        count+=1
+        return count
+      end
+    end
+
     day_range = (Time.current - 2.day).beginning_of_day..(Time.current - 2.day).end_of_day
     day_happenings = happenings.not_decay.where(reported_at: day_range)
     day_successes = day_happenings.habit_success
-    if day_successes.exists?
-      count += 1
+    day_fails = day_happenings.habit_fail
+    if (day_fails.exists? && day_successes.empty?)
+      return count
+    end
+    if (day_fails.empty? && day_successes.exists?)
+      count+=1
+    end
+    if day_fails.exists? && day_successes.exists?
+      if day_successes.maximum(:reported_at) > day_fails.maximum(:reported_at)
+        count+=1
+        return count
+      end
     end
 
     day_range = (Time.current - 3.day).beginning_of_day..(Time.current - 3.day).end_of_day
     day_happenings = happenings.not_decay.where(reported_at: day_range)
     day_successes = day_happenings.habit_success
-    if day_successes.exists?
-      count += 1
+    day_fails = day_happenings.habit_fail
+    if (day_fails.exists? && day_successes.empty?)
+      return count
+    end
+    if (day_fails.empty? && day_successes.exists?)
+      count+=1
+    end
+    if day_fails.exists? && day_successes.exists?
+      if day_successes.maximum(:reported_at) > day_fails.maximum(:reported_at)
+        count+=1
+        return count
+      end
     end
 
     day_range = (Time.current - 4.day).beginning_of_day..(Time.current - 4.day).end_of_day
     day_happenings = happenings.not_decay.where(reported_at: day_range)
     day_successes = day_happenings.habit_success
-    if day_successes.exists?
-      count += 1
+    day_fails = day_happenings.habit_fail
+    if (day_fails.exists? && day_successes.empty?)
+      return count
+    end
+    if (day_fails.empty? && day_successes.exists?)
+      count+=1
+    end
+    if day_fails.exists? && day_successes.exists?
+      if day_successes.maximum(:reported_at) > day_fails.maximum(:reported_at)
+        count+=1
+        return count
+      end
     end
 
     return count
-    # days_last_fail = days_happenings.happening_fail.order(reported_at: :desc).last
-    # days_successes_after_fail = days_happenings.happening_success.where(reported_at: [days_last_fail.reported_at...]).exists?
-    #
-    # if days_successes_after_fail
-    #   count+=1
-    # end
-    # return count
-
-    # groups = happenings.where(reported_at: [30.days.ago...]).group_by {|h|h.reported_at.do_date}
-    # return 0 unless success_groups.keys.last.in?([Date.today, Date.yesterday])
-    #
-    # return success_groups.count
-
   end
 
   def enable_card?
