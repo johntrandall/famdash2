@@ -75,13 +75,13 @@
                     <% end %>
                   </p>
 
-                  <% if Rails.env.development? %>
-                    <p>TEMPLATE <%= template.id %></p>
-                    <p>HISTORY:
-                      <%=template.happenings.last(3).inspect %>
-                    </p>
+                  <%# if Rails.env.development? %>
+<!--                    <p>TEMPLATE <%#= template.id %></p>-->
+<!--                    <p>HISTORY:-->
+                      <%#=template.happenings.last(3).inspect %>
+<!--                    </p>-->
 
-                  <% end %>
+                  <%# end %>
                 </div>
               </div>
             </div>

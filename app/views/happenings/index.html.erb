@@ -5,15 +5,32 @@
       <%= render 'habit_scores' %>
     </header>
     </br>
-    <% selected_user.happenings.group_by_day(&:created_at).each do |group| %>
-    </br>
+    <% selected_user.happenings.group_by_day { |h| h.reported_at }
+                    .sort_by { |kv_pair| kv_pair.first }.reverse
+                    .each do |group| %>
+      </br>
       <span style="text-decoration: underline "><%= group.first %></span>
       <% group.second.each do |happening| %>
         <div>
-          <%= happening.event_kind %> <%= happening.name %> <%= happening.point_value %>
-          <small>(reported by <%= happening.reporting_user&.display_name %> at <%= happening.created_at.strftime("%H:%M") %>)</small>
+          <%= happening.event_kind %> <%= happening.name %> <%= happening.point_value %> | <%= happening.description %>
+          <small>(reported by <%= happening.reporting_user&.display_name %> at <%= happening.reported_at.strftime("%H:%M") %> )</small>
         </div>
       <% end %>
     <% end %>
   <% end %>
 <% end %>
+
+
+
+decay_event           :boolean
+#  description           :string
+#  event_kind            :string
+#  name                  :string
+#  point_value           :integer
+#  reported_at           :datetime
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  happening_template_id :bigint
+#  reporting_user_id     :bigint
+#  user_id               :bigint
+#
