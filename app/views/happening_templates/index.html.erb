@@ -15,11 +15,12 @@
         </tr>
       <% end %>
 
-      <tr>
+      <tr id="happeningTemplate-#{template.id}">
         <%= simple_form_for template do |f| %>
           <td><%= f.input :name %></td>
           <td><%= f.select :kind, HappeningTemplate.kinds.keys %></td>
           <td><%= f.input :point_value %></td>
+          <td><%= f.input :description, as: :text, input_html: {:rows => 5}%></td>
           <td><%= f.input :show_success_button %></td>
           <td><%= f.input :show_pass_button %></td>
           <td><%= f.input :show_fail_button %></td>
