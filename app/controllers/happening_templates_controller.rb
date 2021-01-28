@@ -7,6 +7,10 @@ class HappeningTemplatesController < ApplicationController
     @happening_templates = selected_user.happening_templates
   end
 
+  def create
+    selected_user.happening_templates.create! happening_template_params
+  end
+
   def update
     happening_template = selected_user.happening_templates.find(params[:id])
     # TODO - permissions
@@ -24,7 +28,6 @@ class HappeningTemplatesController < ApplicationController
     redirect_back(fallback_location: happening_templates_path)
   end
 
-
   def sort_down
     happening_template = selected_user.happening_templates.find(params[:id])
     happening_template.increment_position
@@ -36,6 +39,11 @@ class HappeningTemplatesController < ApplicationController
   private
 
   def happening_template_params
-    params.require(:happening_template).to_unsafe_hash #TODO
+    params.require(:happening_template).permit(:name,
+                                               :kind,
+                                               :point_value,
+                                               :description,
+                                               :show_success_button, :show_pass_button, :show_fail_button,
+                                               :allowed_entries_daily_count)
   end
 end
