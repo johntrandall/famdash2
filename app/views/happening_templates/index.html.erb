@@ -4,7 +4,14 @@
 
 <% if current_user && selected_user %>
   <table class="table">
+
     <tbody>
+    <tr>
+      <td colspan="0">
+        <br>
+        <h3 style="text-decoration: underline">Create New</h3>
+      </td>
+    </tr>
 
     <tr id="happeningTemplate-new">
       <%= simple_form_for selected_user.dup.happening_templates.build do |f| %>
@@ -20,6 +27,8 @@
         <td><%= f.submit 'Save' %>
       <% end %>
     </tr>
+
+
 
     <% @happening_templates.each do |template| %>
       <% if template.separator? %>
@@ -43,20 +52,12 @@
           <td><%= f.input :allowed_entries_daily_count %></td>
           <td><%= f.submit 'Save' %>
         <% end %>
-          <td><%= button_to("🗑", happening_template_path(template), method: :delete) %></td>
-        <td>
-          sort:
-          <%= button_to 'up', sort_higher_happening_template_path(template), method: :patch %>
-          <%= button_to 'down', sort_down_happening_template_path(template), method: :patch %>
-        </td>
+        <td>&nbsp; &nbsp; &nbsp; sort:</td>
+        <td><%= button_to 'up', sort_higher_happening_template_path(template), method: :patch %></td>
+        <td><%= button_to 'down', sort_down_happening_template_path(template), method: :patch %></td>
       </tr>
     <% end %>
-    <tr>
-      <td colspan="0">
-        <br>
-        <h3 style="text-decoration: underline">Create New</h3>
-      </td>
-    </tr>
+
     </tbody>
   </table>
 <% end %>

@@ -9,6 +9,9 @@ class HappeningTemplatesController < ApplicationController
 
   def create
     selected_user.happening_templates.create! happening_template_params
+    flash[:success] = 'Habit created'
+
+    redirect_back(fallback_location: happening_templates_path)
   end
 
   def update
