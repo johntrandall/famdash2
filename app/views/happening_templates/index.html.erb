@@ -7,7 +7,7 @@
     <tbody>
 
     <tr id="happeningTemplate-new">
-      <%= simple_form_for selected_user.happening_templates.build do |f| %>
+      <%= simple_form_for selected_user.dup.happening_templates.build do |f| %>
         <%#= f.hidden_field :selected_user %>
         <td><%= f.input :name %></td>
         <td><%= f.select :kind, HappeningTemplate.kinds.keys %></td>
