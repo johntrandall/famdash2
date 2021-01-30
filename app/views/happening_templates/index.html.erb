@@ -52,6 +52,7 @@
           <td><%= f.input :allowed_entries_daily_count %></td>
           <td><%= f.submit 'Save' %>
         <% end %>
+        <td><%= button_to("🗑", happening_template_path(template), method: :delete) %></td>
         <td>&nbsp; &nbsp; &nbsp; sort:</td>
         <td><%= button_to 'up', sort_higher_happening_template_path(template), method: :patch %></td>
         <td><%= button_to 'down', sort_down_happening_template_path(template), method: :patch %></td>
