@@ -5,6 +5,22 @@
 <% if current_user && selected_user %>
   <table class="table">
     <tbody>
+
+    <tr id="happeningTemplate-new">
+      <%= simple_form_for selected_user.happening_templates.build do |f| %>
+        <%#= f.hidden_field :selected_user %>
+        <td><%= f.input :name %></td>
+        <td><%= f.select :kind, HappeningTemplate.kinds.keys %></td>
+        <td><%= f.input :point_value %></td>
+        <td><%= f.input :description, as: :text, input_html: { :rows => 5 } %></td>
+        <td><%= f.input :show_success_button %></td>
+        <td><%= f.input :show_pass_button %></td>
+        <td><%= f.input :show_fail_button %></td>
+        <td><%= f.input :allowed_entries_daily_count %></td>
+        <td><%= f.submit 'Save' %>
+      <% end %>
+    </tr>
+
     <% @happening_templates.each do |template| %>
       <% if template.separator? %>
         <tr>
@@ -41,22 +57,6 @@
         <h3 style="text-decoration: underline">Create New</h3>
       </td>
     </tr>
-
-    <tr id="happeningTemplate-new">
-      <%= simple_form_for selected_user.happening_templates.build do |f| %>
-        <%#= f.hidden_field :selected_user %>
-        <td><%= f.input :name %></td>
-        <td><%= f.select :kind, HappeningTemplate.kinds.keys %></td>
-        <td><%= f.input :point_value %></td>
-        <td><%= f.input :description, as: :text, input_html: { :rows => 5 } %></td>
-        <td><%= f.input :show_success_button %></td>
-        <td><%= f.input :show_pass_button %></td>
-        <td><%= f.input :show_fail_button %></td>
-        <td><%= f.input :allowed_entries_daily_count %></td>
-        <td><%= f.submit 'Save' %>
-      <% end %>
-    </tr>
-
     </tbody>
   </table>
 <% end %>
