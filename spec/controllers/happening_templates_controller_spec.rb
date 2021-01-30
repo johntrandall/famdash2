@@ -40,9 +40,17 @@ describe HappeningTemplatesController do
 
   describe "#create" do
     it 'creates a HappeningTemplate on the selected user' do
-      params = { 'happening_template' => { "user_id"=> selected_user.id, "name" => "derp", "kind" => "good_habit", "point_value" => "1", "description" => "", "show_success_button" => "1", "show_pass_button" => "0", "show_fail_button" => "0", "allowed_entries_daily_count" => "" } }
+      params = { 'happening_template' => { "user_id" => selected_user.id, "name" => "derp", "kind" => "good_habit", "point_value" => "1", "description" => "", "show_success_button" => "1", "show_pass_button" => "0", "show_fail_button" => "0", "allowed_entries_daily_count" => "" } }
       expect { post :create, params: params }.to change { HappeningTemplate.count }.by(1)
       expect(HappeningTemplate.last.name).to eq 'derp'
     end
+  end
+
+  describe '#destroy' do
+    it 'destroys the template' do
+      happening_template = HappeningTemplate.create(user: selected_user)
+      expect { post :destroy, params: { id: happening_template.id } }.to change { HappeningTemplate.count }.by(-1)
+    end
+
   end
 end
