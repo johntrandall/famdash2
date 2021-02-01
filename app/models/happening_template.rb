@@ -21,7 +21,14 @@ class HappeningTemplate < ApplicationRecord
       when :habit_fail
         fail_streak_count
     end
+  end
 
+  def success_count_14_day
+    happenings.habit_success.where(reported_at: 14.days.ago...Time.current).count
+  end
+
+  def fail_count_14_day
+    happenings.habit_fail.where(reported_at: 14.days.ago...Time.current).count
   end
 
   def success_streak_count(count: 0, day_range: nil)

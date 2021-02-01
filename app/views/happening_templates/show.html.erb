@@ -1,0 +1,14 @@
+Name: <%= @happening_template.name %></br>
+kind: <%= @happening_template.kind %></br>
+point value: <%= @happening_template.point_value %></br>
+descriptiong: <%= @happening_template.description %></br>
+success button: <%= @happening_template.show_success_button %></br>
+pass buton: <%= @happening_template.show_pass_button %></br>
+fail button: <%= @happening_template.show_fail_button %></br>
+daily entries: <%= @happening_template.allowed_entries_daily_count %></br>
+<br>
+<br>
+<%= @happening_template.happenings.count %>
+
+
+<%= image_tag(@file_name) %>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get :grid_index
     end
   end
-  resources :happening_templates, only: [:index, :create, :update, :destroy] do
+  resources :happening_templates, only: [:index, :show, :create, :update] do
     member do
       patch :sort_higher
       patch :sort_down

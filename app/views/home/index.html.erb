@@ -18,7 +18,12 @@
             <div class="col-sm-3">
               <div class="card mb-4 <%= "bg-secondary text-light" if !template.enable_card? %>">
                 <div class="card-body">
-                  <h6 class="card-title"><%= template.name %></h6>
+                  <div class="card-title">
+                    <span class="float-end">
+                      <%= link_to "📊", happening_template_path(template), class: 'btn btn-info' %>
+                    </span>
+                    <h6><%= template.name %></h6>
+                  </div>
                   <p class="card-text"><%= template.description %></p>
 
                   <% if template.show_success_button && template.enable_card? %>
@@ -72,14 +77,19 @@
                       <br>
                       <%= "Daily Fails Streak!" %>
                       <span class="badge bg-danger"><%= template.streak_count %></span>
-                    <% end %>
+                    <% end %><br>
                   </p>
 
+                  <p class="text-end small">
+                    last 14-days: <span class="badge bg-success"> <%= template.success_count_14_day %></span> <span class="badge bg-danger"> <%= template.fail_count_14_day %></span>
+                  </p>
+
+
                   <%# if Rails.env.development? %>
-<!--                    <p>TEMPLATE <%#= template.id %></p>-->
-<!--                    <p>HISTORY:-->
-                      <%#=template.happenings.last(3).inspect %>
-<!--                    </p>-->
+                  <!--                    <p>TEMPLATE <%#= template.id %></p>-->
+                  <!--                    <p>HISTORY:-->
+                  <%#=template.happenings.last(3).inspect %>
+                  <!--                    </p>-->
 
                   <%# end %>
                 </div>
