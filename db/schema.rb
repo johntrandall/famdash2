@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_041730) do
+ActiveRecord::Schema.define(version: 2021_02_01_140603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2021_01_21_041730) do
     t.bigint "happening_template_id"
     t.boolean "decay_event"
     t.datetime "reported_at"
+    t.datetime "deleted_at"
     t.index ["happening_template_id"], name: "index_happenings_on_happening_template_id"
     t.index ["reporting_user_id"], name: "index_happenings_on_reporting_user_id"
     t.index ["user_id"], name: "index_happenings_on_user_id"

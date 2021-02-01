@@ -43,7 +43,9 @@ class HappeningsController < ApplicationController
 
   def update
     @happening = Happening.find(params[:id])
-    @happening.update!(happening_params)
+
+    deleted_at = happening_params[:deleted_at] ? Time.current : nil
+    @happening.update!(happening_params.merge(deleted_at: deleted_at))
 
     flash[:success] = 'saved'
     redirect_back(fallback_location: edit_happening_path(@happening))
@@ -60,14 +62,16 @@ class HappeningsController < ApplicationController
   end
 
   def happening_params
-    params.require(:happening).permit(:selected_user_id,
-                                      :reporting_user_id,
-                                      :template_id,
-                                      :event_kind,
-                                      :name,
-                                      :description,
-                                      :point_value,
-    )
+    params
+      .require(:happening)
+      .permit(:selected_user_id,
+              :reporting_user_id,
+              :template_id,
+              :event_kind,
+              :name,
+              :description,
+              :point_value,
+              :deleted_at)
   end
 
   def grid_params

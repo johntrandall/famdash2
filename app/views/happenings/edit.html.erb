@@ -23,6 +23,7 @@
     <label class="col-sm-3 col-form-label">Happening template description</label>
     <%= @happening.happening_template.description %>
   </div>
+  <%= f.input :deleted_at, as: :boolean, checked_value: true, unchecked_value: false %>
 
   <%= f.submit 'save'  %>
 <% end %>

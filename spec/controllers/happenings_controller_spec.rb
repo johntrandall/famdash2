@@ -45,10 +45,30 @@ describe HappeningsController do
   end
 
   describe '#edit' do
-    let(:happening) { Happening.create!(user: User.create!(display_name:'derp')) }
+    let(:happening) { Happening.create!(user: User.create!(display_name: 'derp')) }
     it 'works' do
       get :edit, params: { id: happening.id }
       expect(response).to be_successful
+    end
+  end
+
+  describe '#update' do
+    let(:happening) { Happening.create!(user: User.create!(display_name: 'derp')) }
+    it 'updates' do
+      expect {
+        post :update, params: { id: happening.id, "happening" => { "name" => "new-name" } }
+        happening.reload
+      }.to change { happening.name }
+
+      expect(response).to be_redirect
+    end
+
+    it 'soft-deletes' do
+      expect {
+        post :update, params: { id: happening.id, "happening" => { "name" => "new-name", deleted_at: true } }
+        happening.reload
+      }.to change { happening.deleted_at }.from(nil)
+
     end
   end
 end

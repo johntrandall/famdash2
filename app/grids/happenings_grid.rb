@@ -35,7 +35,7 @@ class HappeningsGrid < BaseGrid
                                                teamplate.name || teamplate.description,
                                                Rails.application.routes.url_helpers.happening_templates_path(anchor: "happeningTemplate-#{teamplate.id}"))
   end
-  column(:id) do |happening|
+  column(:id,  header: nil) do |happening|
     ActionController::Base.helpers.link_to('edit', Rails.application.routes.url_helpers.edit_happening_path(happening))
   end
 end

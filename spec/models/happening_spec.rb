@@ -15,6 +15,7 @@ end
 #
 #  id                    :bigint           not null, primary key
 #  decay_event           :boolean
+#  deleted_at            :datetime
 #  description           :string
 #  event_kind            :string
 #  name                  :string
