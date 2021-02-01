@@ -7,6 +7,33 @@ class HappeningTemplatesController < ApplicationController
     @happening_templates = selected_user.happening_templates
   end
 
+  def show
+    @happening_template = selected_user.happening_templates.find(params[:id])
+
+    array_of_dates = (14.days.ago.to_date...Time.current.to_date).uniq
+    require 'gruff'
+    g = Gruff::Bar.new
+    g.title = @happening_template.name
+    g.labels = array_of_dates
+                 .each_with_index.map { |x, i| [i, x] }.to_h
+                 .select { |k, v| v.strftime('%A') == "Monday" }
+                 .transform_values.each { |v| v = v&.strftime('%A, %m/%d') }
+    g.data(:successes,
+           array_of_dates
+             .map { |date| @happening_template.happenings.habit_success.where(reported_at: [date.beginning_of_day...date.end_of_day]).count },
+           '#33cc33')
+    g.data(:fails,
+           array_of_dates
+             .map { |date| @happening_template.happenings.habit_fail.where(reported_at: [date.beginning_of_day...date.end_of_day]).count * -1 },
+           '#ff0000')
+    g.y_axis_increment = 1
+    g.marker_font_size = 10
+    g.no_data_message = 'no data'
+
+    @file_name = "gruff/#{controller_name}_#{action_name}_#{@happening_template.id}.png"
+    g.write("app/assets/images/#{@file_name}")
+  end
+
   def create
     selected_user.happening_templates.create! happening_template_params
     flash[:success] = 'Habit created'

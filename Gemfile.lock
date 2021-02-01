@@ -93,6 +93,10 @@ GEM
       activesupport (>= 4.2.0)
     groupdate (5.2.1)
       activesupport (>= 5)
+    gruff (0.12.1)
+      histogram
+      rmagick
+    histogram (0.2.4.1)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.1)
@@ -181,6 +185,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.8.2)
+    rmagick (4.1.2)
     rspec-core (3.10.0)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.0)
@@ -268,6 +273,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   datagrid
   groupdate
+  gruff
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.3)
