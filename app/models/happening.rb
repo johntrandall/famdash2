@@ -7,6 +7,7 @@ class Happening < ApplicationRecord
                      habit_pair: 'habit_pair',
                      habit_fail: 'habit_fail' }
 
+  default_scope { where(deleted_at: [nil]) }
   scope :not_decay, -> { where(decay_event: [false, nil]) }
 end
 
@@ -16,6 +17,7 @@ end
 #
 #  id                    :bigint           not null, primary key
 #  decay_event           :boolean
+#  deleted_at            :datetime
 #  description           :string
 #  event_kind            :string
 #  name                  :string
