@@ -7,6 +7,18 @@ RSpec.describe Happening, type: :model do
     user = User.create!
     user.happenings.create!
   end
+
+  describe 'update' do
+    it 'callbacks to Happening::DecayFactory' do
+      user = User.create!
+      happening = user.happenings.create!
+
+      expect(Happening::DecayFactory).to receive(:new).and_return(mock_decay_factory = instance_double(Happening::DecayFactory))
+      expect(mock_decay_factory).to receive(:call).with(user)
+
+      happening.update!(name: 'foo')
+    end
+  end
 end
 
 # == Schema Information

@@ -9,6 +9,12 @@ class Happening < ApplicationRecord
 
   default_scope { where(deleted_at: [nil]) }
   scope :not_decay, -> { where(decay_event: [false, nil]) }
+
+  after_update :rerun_decay
+
+  def rerun_decay
+    Happening::DecayFactory.new.call(user)
+  end
 end
 
 # == Schema Information
