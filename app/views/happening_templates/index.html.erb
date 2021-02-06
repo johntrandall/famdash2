@@ -3,62 +3,63 @@
 </h2>
 
 <% if current_user && selected_user %>
-  <table class="table">
-
-    <tbody>
-    <tr>
-      <td colspan="0">
-        <br>
-        <h3 style="text-decoration: underline">Create New</h3>
-      </td>
-    </tr>
-
-    <tr id="happeningTemplate-new">
-      <%= simple_form_for selected_user.dup.happening_templates.build do |f| %>
-        <%#= f.hidden_field :selected_user %>
-        <td><%= f.input :name %></td>
-        <td><%= f.select :kind, HappeningTemplate.kinds.keys %></td>
-        <td><%= f.input :point_value %></td>
-        <td><%= f.input :description, as: :text, input_html: { :rows => 5 } %></td>
-        <td><%= f.input :show_success_button %></td>
-        <td><%= f.input :show_pass_button %></td>
-        <td><%= f.input :show_fail_button %></td>
-        <td><%= f.input :allowed_entries_daily_count %></td>
-        <td><%= f.submit 'Save' %>
-      <% end %>
-    </tr>
 
 
 
-    <% @happening_templates.each do |template| %>
-      <% if template.separator? %>
-        <tr>
-          <td colspan="0">
-            <br>
-            <h3 style="text-decoration: underline"><%= template.name %></h3>
-          </td>
-        </tr>
-      <% end %>
+  <!--  NEW FORM-->
+  <h3 style="text-decoration: underline">Create New</h3>
 
-      <tr id="happeningTemplate-#{template.id}">
-        <%= simple_form_for template do |f| %>
-          <td><%= f.input :name %></td>
-          <td><%= f.select :kind, HappeningTemplate.kinds.keys %></td>
-          <td><%= f.input :point_value %></td>
-          <td><%= f.input :description, as: :text, input_html: { :rows => 5 } %></td>
-          <td><%= f.input :show_success_button %></td>
-          <td><%= f.input :show_pass_button %></td>
-          <td><%= f.input :show_fail_button %></td>
-          <td><%= f.input :allowed_entries_daily_count %></td>
-          <td><%= f.submit 'Save' %>
-        <% end %>
-        <td><%= button_to("🗑", happening_template_path(template), method: :delete) %></td>
-        <td>&nbsp; &nbsp; &nbsp; sort:</td>
-        <td><%= button_to 'up', sort_higher_happening_template_path(template), method: :patch %></td>
-        <td><%= button_to 'down', sort_down_happening_template_path(template), method: :patch %></td>
-      </tr>
+  <%= simple_form_for selected_user.dup.happening_templates.build do |f| %>
+    <%#= f.hidden_field :selected_user %>
+
+    <div class="row align-items-end">
+      <%= f.input :name, wrapper_html: { class: 'col-auto' } %>
+      <%= f.input :kind, label: 'Kind', collection: HappeningTemplate.kinds.keys, wrapper_html: { class: 'col-auto' } %>
+      <%= f.input :point_value, label: 'Points', wrapper_html: { class: 'col-1' } %>
+      <%= f.input :allowed_entries_daily_count, label: 'Daily limit', wrapper_html: { class: 'col-1' } %>
+      <%= f.input :description, as: :text, wrapper_html: { class: 'col-auto' } %>
+
+      <div class="col-auto">
+        <%= f.input :show_success_button, label: 'show hit' %>
+        <%= f.input :show_pass_button, label: 'show pass' %>
+        <%= f.input :show_fail_button, label: 'show fail' %>
+      </div>
+      <div class="col-auto">
+        <%= f.submit '💾' %>
+      </div>
+    </div>
+  <% end %>
+
+  <!--  INDEX -->
+  <% @happening_templates.each do |template| %>
+    <!--SEPERATOR-->
+    <hr>
+    <% if template.separator? %>
+      <h3 class="mt-5" style="text-decoration: underline"><%= template.name %></h3>
     <% end %>
+    <!--      TEMPLATES-->
+    <%= simple_form_for template, id: "happeningTemplate-#{template.id}" do |f| %>
+      <div class="row align-items-end">
+        <%= f.input :name, wrapper_html: { class: 'col-auto' } %>
+        <%= f.input :kind, label: 'Kind', collection: HappeningTemplate.kinds.keys, wrapper_html: { class: 'col-auto' } %>
+        <%= f.input :point_value, label: 'Points', wrapper_html: { class: 'col-1' } %>
+        <%= f.input :allowed_entries_daily_count, label: 'Daily limit', wrapper_html: { class: 'col-1' } %>
+        <%= f.input :description, as: :text, wrapper_html: { class: 'col-auto' } %>
 
-    </tbody>
-  </table>
+        <div class="col-auto">
+          <%= f.input :show_success_button, label: 'show hit' %>
+          <%= f.input :show_pass_button, label: 'show pass' %>
+          <%= f.input :show_fail_button, label: 'show fail' %>
+        </div>
+        <div class="col-auto">
+          <%= f.submit '💾' %>
+    <% end %>
+          <%= button_to("🗑", happening_template_path(template), {method: :delete, class: 'mt-3'}) %>
+        </div>
+        <div class="col-auto">
+          <%= button_to '⬆️', sort_higher_happening_template_path(template), method: :patch %>
+          <%= button_to '⬇️', sort_down_happening_template_path(template), method: :patch %>
+        </div>
+      </div>
+  <% end %>
 <% end %>
