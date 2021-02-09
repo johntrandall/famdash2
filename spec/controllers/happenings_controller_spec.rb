@@ -19,7 +19,7 @@ describe HappeningsController do
     subject do
       # template.users << reportee_user
       # expect_any_instance_of(ApplicationController).to receive(:current_user).and_return(reporting_user)
-      post :create, params: { selected_user_id: reportee_user.id, reporting_user_id: reporting_user.id, template_id: template.id }
+      post :create, params: { happening: { selected_user_id: reportee_user.id, reporting_user_id: reporting_user.id, template_id: template.id, event_kind: 'good_habit_hit_score' } }
     end
 
     let(:template) { HappeningTemplate.create!(point_value: 99, user: reportee_user) }
