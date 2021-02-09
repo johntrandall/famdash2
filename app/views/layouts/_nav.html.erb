@@ -14,7 +14,7 @@
 
   <ul class="nav nav-tabs">
     <li class="nav-item nav-link">Data for:</li>
-    <% User.where(display_name: ['Max', 'Sam']).each do |user| %>
+    <% User.habits_enabled.each do |user| %>
       <li class="nav-item">
         <%= link_to user.display_name,
                     selected_user_path(id: user.id),

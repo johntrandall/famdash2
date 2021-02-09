@@ -14,9 +14,10 @@ end
 #
 # Table name: users
 #
-#  id           :bigint           not null, primary key
-#  display_name :string
-#  role         :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id             :bigint           not null, primary key
+#  display_name   :string
+#  habits_enabled :boolean
+#  role           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
