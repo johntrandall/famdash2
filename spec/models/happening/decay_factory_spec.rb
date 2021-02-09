@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Happening::DecayFactory do
   describe '.run_all' do
     it 'calls for Max' do
-      max_user = User.create(display_name: 'Max')
+      max_user = User.create(display_name: 'Max', habits_enabled: true)
       mock_service = instance_double(Happening::DecayFactory)
       expect(Happening::DecayFactory).to receive(:new).and_return(mock_service)
       expect(mock_service).to receive(:call).with(max_user)
@@ -36,7 +36,7 @@ describe Happening::DecayFactory do
       Happening.create!(user: user, event_kind: :habit_success_decay, reported_at: 1.days.ago.beginning_of_day, point_value: -1)
 
       expect { Happening::DecayFactory.new.call(user) }.to change { Happening.count }.by 2
-      # expect(Happening.habit_success_decay.pluck(:point_value)).to match_array [-100, -66, -44, -30, -20, -13, -9]
+      expect(Happening.habit_success_decay.pluck(:point_value)).to match_array [-100, -66, -44, -30, -20, -13, -9]
     end
 
     it 'generates fail decay events' do

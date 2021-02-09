@@ -19,10 +19,17 @@ class Happening < ApplicationRecord
                                                           'good_habit_miss_score',
                                                           'good_habit_pass_score',
                                                           'good_habit_fail_score']) }
-
+  scope :habit_success_and_decay_inclusive, -> { where(event_kind: ['habit_success',
+                                                                    'good_habit_hit_score',
+                                                                    'good_habit_miss_score',
+                                                                    'good_habit_pass_score',
+                                                                    'good_habit_fail_score',
+                                                                    'habit_success_decay']) }
   after_update :rerun_decay
 
   def rerun_decay
+    return if habit_success_decay?
+
     Happening::DecayFactory.new.call(user)
   end
 end

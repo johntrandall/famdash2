@@ -11,10 +11,8 @@ class Happening
       array_of_last_7_days = (7.days.ago.to_date...Time.current.to_date).uniq
 
       array_of_last_7_days.each do |date|
-        puts date
         create_habit_success_decay(date, user)
         # create_habit_fail_decay(date, user)
-
       end
     end
 
@@ -39,17 +37,19 @@ class Happening
 
     def create_habit_success_decay(date, user)
       puts date
-      sucess_score_to_date = user.happenings.habit_success_inclusive.where(reported_at: [...date.beginning_of_day]).sum(:point_value)
-      success_score_change = -1 * (sucess_score_to_date / 3)
+      # puts user.happenings.habit_success_decay.count
+      # puts user.happenings.habit_success_decay.map(&:point_value)
+      puts cumulative_sucess_score_to_date = user.happenings.habit_success_and_decay_inclusive.where(reported_at: [...date.beginning_of_day]).sum(:point_value)
+      puts success_score_change_that_should_happen_begining_of_day = -1 * (cumulative_sucess_score_to_date / 3)
 
-      if success_score_change.nonzero?
+      if success_score_change_that_should_happen_begining_of_day.nonzero?
         decay_happening = user.happenings.find_or_create_by!(event_kind: :habit_success_decay,
                                                              reported_at: date.beginning_of_day)
-        if decay_happening.point_value != success_score_change
-      #     decay_happening.update!(name: 'success score fade',
-      #                             description: 'success score overnight fade - loose (1/3)',
-      #                             point_value: success_score_change)
-      # #TODO - need to skip callbacks here
+        if decay_happening.point_value != success_score_change_that_should_happen_begining_of_day
+          decay_happening.update!(name: 'success score fade',
+                                  description: 'success score overnight fade - loose (1/3)',
+                                  point_value: success_score_change_that_should_happen_begining_of_day)
+          # #TODO - need to skip callbacks here
         end
       end
     end
