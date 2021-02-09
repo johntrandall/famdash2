@@ -3,6 +3,7 @@ class Happening < ApplicationRecord
   belongs_to :reporting_user, class_name: User.to_s, optional: true
   belongs_to :happening_template, optional: true
 
+  # TODO: names are terrible
   enum event_kind: { habit_success: 'habit_success',
                      good_habit_hit_score: 'good_habit_hit_score',
                      good_habit_pass_score: 'good_habit_pass_score',
@@ -13,6 +14,8 @@ class Happening < ApplicationRecord
                      habit_fail: 'habit_fail' }
 
   default_scope { where(deleted_at: [nil]) }
+
+  # TODO: names are terrible
   scope :not_decay, -> { where(decay_event: [false, nil]) }
   scope :habit_success_inclusive, -> { where(event_kind: ['habit_success',
                                                           'good_habit_hit_score',
