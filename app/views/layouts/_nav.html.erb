@@ -36,7 +36,6 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
             <%= link_to 'Habits', home_index_path, class: "nav-link #{ 'active' if controller.is_a? HomeController }" %>
@@ -55,7 +54,6 @@
             <%= link_to 'Habit Setup', happening_templates_path, class: "nav-link #{ 'active' if controller.is_a? HappeningTemplatesController }" %>
           </li>
         </ul>
-      </div>
     </div>
   </nav>
 </header>
