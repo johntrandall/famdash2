@@ -14,6 +14,7 @@
             <div class="col-12">
               <h3 style="text-decoration: underline"><%= template.name.titleize %></h3>
             </div>
+
           <% else %>
             <div class="col-sm-3">
               <div class="card mb-4 <%= "bg-secondary text-light" if !template.enable_card? %>">
@@ -26,44 +27,44 @@
                   </div>
                   <p class="card-text"><%= template.description %></p>
 
-                  <% if template.show_success_button && template.enable_card? %>
+                  <% if template.good_habit_hit_score && template.enable_card? %>
                     <%= button_to happenings_path,
                                   method: :post,
-                                  params: { template_id: template,
-                                            selected_user_id: selected_user.id,
-                                            reporting_user_id: current_user.id,
-                                            event_kind: :habit_success },
+                                  params: { happening: { template_id: template,
+                                                         selected_user_id: selected_user.id,
+                                                         reporting_user_id: current_user.id,
+                                                         event_kind: :good_habit_hit_score } },
                                   form_class: 'd-inline',
                                   class: 'btn btn-success d-inline' do %>
-                      Success +<%= template.point_value %>
+                      Success <%= template.good_habit_hit_score %>
                     <% end %>
                   <% end %>
 
-                  <% if template.show_pass_button && template.enable_card? %>
+                  <% if template.good_habit_pass_score && template.enable_card? %>
                     <% disabled = current_user.child? %>
                     <%= button_to happenings_path,
                                   method: :post,
                                   params: { template_id: template,
                                             selected_user_id: selected_user.id,
                                             reporting_user_id: current_user.id,
-                                            event_kind: :habit_pass },
+                                            event_kind: :good_habit_pass_score },
                                   disabled: disabled,
                                   form_class: 'd-inline',
                                   class: "btn #{disabled ? 'btn-outline-warning' : 'btn-warning'} d-inline " do %>
-                      Skip
+                      Pass <%= template.good_habit_pass_score %>
                     <% end %>
                   <% end %>
 
-                  <% if template.show_fail_button && template.enable_card? %>
+                  <% if template.good_habit_fail_score && template.enable_card? %>
                     <%= button_to happenings_path,
                                   method: :post,
                                   params: { template_id: template,
                                             selected_user_id: selected_user.id,
                                             reporting_user_id: current_user.id,
-                                            event_kind: :habit_fail },
+                                            event_kind: :good_habit_fail_score },
                                   form_class: 'd-inline',
                                   class: "btn btn-danger d-inline" do %>
-                      Fail -<%= template.point_value %>
+                      Fail <%= template.point_value %>
                     <% end %>
                   <% end %>
 
@@ -81,7 +82,8 @@
                   </p>
 
                   <p class="text-end small">
-                    last 14-days: <span class="badge bg-success"> <%= template.success_count_14_day %></span> <span class="badge bg-danger"> <%= template.fail_count_14_day %></span>
+                    last 14-days: <span class="badge bg-success"> <%= template.success_count_14_day %></span>
+                    <span class="badge bg-danger"> <%= template.fail_count_14_day %></span>
                   </p>
 
 

@@ -11,22 +11,28 @@ class HappeningsController < ApplicationController
   end
 
   def create
-    reporting_user = User.find(happening_params_old[:reporting_user_id])
-    reportee_user = User.find(happening_params_old[:selected_user_id])
+    reporting_user = User.find(happening_params[:reporting_user_id])
+    reportee_user = User.find(happening_params[:selected_user_id])
 
-    happening_template = reportee_user.happening_templates.find(happening_params_old[:template_id])
-    event_kind = happening_params_old[:event_kind]
+    happening_template = reportee_user.happening_templates.find(happening_params[:template_id])
+    event_kind = happening_params[:event_kind]
+    score_from_template = happening_template.send(event_kind)
 
     Happening.create!(user: reportee_user,
                       reporting_user: reporting_user,
                       reported_at: Time.current,
                       event_kind: event_kind,
                       happening_template: happening_template,
+                      point_value: score_from_template,
                       **happening_template.attributes.except('id',
                                                              'kind',
                                                              'created_at',
                                                              'updated_at',
                                                              'position',
+                                                             'good_habit_hit_score',
+                                                             'good_habit_pass_score',
+                                                             'good_habit_miss_score',
+                                                             'good_habit_fail_score',
                                                              'show_success_button',
                                                              'show_pass_button',
                                                              'show_fail_button',

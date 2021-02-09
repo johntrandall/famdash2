@@ -4,11 +4,21 @@ class Happening < ApplicationRecord
   belongs_to :happening_template, optional: true
 
   enum event_kind: { habit_success: 'habit_success',
+                     good_habit_hit_score: 'good_habit_hit_score',
+                     good_habit_pass_score: 'good_habit_pass_score',
+                     good_habit_miss_score: 'good_habit_miss_score',
+                     good_habit_fail_score: 'good_habit_fail_score',
                      habit_pair: 'habit_pair',
                      habit_fail: 'habit_fail' }
 
   default_scope { where(deleted_at: [nil]) }
   scope :not_decay, -> { where(decay_event: [false, nil]) }
+  scope :habit_success_inclusive, -> { where(event_kind: [habit_success,
+                                                good_habit_hit_score,
+                                                good_habit_miss_score,
+                                                good_habit_pass_score,
+                                                good_habit_fail_score]) }
+
 
   after_update :rerun_decay
 
