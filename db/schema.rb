@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_09_031713) do
+ActiveRecord::Schema.define(version: 2021_02_09_032259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,10 @@ ActiveRecord::Schema.define(version: 2021_02_09_031713) do
     t.boolean "show_pass_button", default: false
     t.boolean "show_fail_button", default: false
     t.integer "allowed_entries_daily_count"
+    t.integer "good_habit_hit_score"
+    t.integer "good_habit_pass_score"
+    t.integer "good_habit_miss_score"
+    t.integer "good_habit_fail_score"
     t.index ["user_id"], name: "index_happening_templates_on_user_id"
   end
 

@@ -1,0 +1,36 @@
+<%= simple_form_for template, id: "happeningTemplate-#{template.id}" do |f| %>
+  <%#= f.hidden_field :selected_user %>
+
+  <div class="row align-items-end">
+    <%= f.input :name, wrapper_html: { class: 'col-auto' } %>
+    <%= f.input :kind, label: 'Kind', collection: HappeningTemplate.kinds.keys, wrapper_html: { class: 'col-auto' } %>
+    <%= f.input :point_value, label: 'Points', wrapper_html: { class: 'col-1' } %>
+
+    <%= f.input :good_habit_hit_score, wrapper_html: { class: 'col-1' } %>
+    <%= f.input :good_habit_pass_score, wrapper_html: { class: 'col-1' } %>
+    <%= f.input :good_habit_miss_score, wrapper_html: { class: 'col-1' } %>
+    <%= f.input :good_habit_fail_score, wrapper_html: { class: 'col-1' } %>
+
+    <%= f.input :allowed_entries_daily_count, label: 'Daily limit', wrapper_html: { class: 'col-1' } %>
+    <%= f.input :description, as: :text, wrapper_html: { class: 'col-auto' } %>
+
+    <div class="col-auto">
+      <%= f.input :show_success_button, label: 'show hit' %>
+      <%= f.input :show_pass_button, label: 'show pass' %>
+      <%= f.input :show_fail_button, label: 'show fail' %>
+    </div>
+    <div class="col-auto">
+      <%= f.submit '💾' %>
+    </div>
+<% end %>
+
+<% if template.persisted? %>
+  <div class="col-auto">
+    <%= button_to("🗑", happening_template_path(template), { method: :delete, class: 'mt-3' }) %>
+  </div>
+  <div class="col-auto">
+    <%= button_to '⬆️', sort_higher_happening_template_path(template), method: :patch %>
+    <%= button_to '⬇️', sort_down_happening_template_path(template), method: :patch %>
+  </div>
+<% end %>
+</div>

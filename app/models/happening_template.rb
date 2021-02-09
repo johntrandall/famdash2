@@ -103,6 +103,10 @@ end
 #  id                          :bigint           not null, primary key
 #  allowed_entries_daily_count :integer
 #  description                 :string
+#  good_habit_fail_score       :integer
+#  good_habit_hit_score        :integer
+#  good_habit_miss_score       :integer
+#  good_habit_pass_score       :integer
 #  kind                        :string
 #  name                        :string
 #  point_value                 :integer
