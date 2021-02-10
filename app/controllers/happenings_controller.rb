@@ -18,11 +18,12 @@ class HappeningsController < ApplicationController
     event_kind = happening_params[:event_kind]
     score_from_template = happening_template.send(event_kind)
 
+    # raise "TODO finish handling fail conditions here, and in decay"
     Happening.create!(user: reportee_user,
                       reporting_user: reporting_user,
                       reported_at: Time.current,
-                      event_kind: event_kind,
                       happening_template: happening_template,
+                      event_kind: event_kind,
                       point_value: score_from_template,
                       **happening_template.attributes.except('id',
                                                              'kind',
@@ -33,6 +34,9 @@ class HappeningsController < ApplicationController
                                                              'good_habit_pass_score',
                                                              'good_habit_miss_score',
                                                              'good_habit_fail_score',
+                                                             'bad_habit_avoid_score',
+                                                             'bad_habit_exception_score',
+                                                             'bad_habit_fail_score',
                                                              'show_success_button',
                                                              'show_pass_button',
                                                              'show_fail_button',

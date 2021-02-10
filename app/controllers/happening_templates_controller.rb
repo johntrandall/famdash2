@@ -96,6 +96,19 @@ class HappeningTemplatesController < ApplicationController
                                                :point_value,
                                                :description,
                                                :show_success_button, :show_pass_button, :show_fail_button,
-                                               :allowed_entries_daily_count)
+                                               :allowed_entries_daily_count,
+                                               :habit_success,
+                                               :good_habit_hit_score,
+                                               :good_habit_pass_score,
+                                               :good_habit_miss_score,
+                                               :good_habit_fail_score,
+                                               :habit_success_decay,
+                                               :habit_fail,
+                                               :bad_habit_avoid_score,
+                                               :bad_habit_exception_score,
+                                               :bad_habit_fail_score,
+                                               :habit_fail_decay,
+                                               :habit_pair,
+    )
   end
 end

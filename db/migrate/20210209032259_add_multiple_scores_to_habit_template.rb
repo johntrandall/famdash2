@@ -1,4 +1,4 @@
-class AddMultipleScoresToHabitTemplate < ActiveRecord::Migration[6.1]
+class AddMultipleScoresToHabitTemplateMore < ActiveRecord::Migration[6.1]
   class HappeningTemplate < ApplicationRecord
     enum kind: { separator: 'separator',
                  good_habit: 'good_habit',

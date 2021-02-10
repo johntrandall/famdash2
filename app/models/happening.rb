@@ -4,14 +4,22 @@ class Happening < ApplicationRecord
   belongs_to :happening_template, optional: true
 
   # TODO: names are terrible
-  enum event_kind: { habit_success: 'habit_success',
-                     good_habit_hit_score: 'good_habit_hit_score',
-                     good_habit_pass_score: 'good_habit_pass_score',
-                     good_habit_miss_score: 'good_habit_miss_score',
-                     good_habit_fail_score: 'good_habit_fail_score',
-                     habit_success_decay: 'habit_success_decay',
-                     habit_pair: 'habit_pair',
-                     habit_fail: 'habit_fail' }
+  enum event_kind: {
+    habit_success: 'habit_success',
+    good_habit_hit_score: 'good_habit_hit_score',
+    good_habit_pass_score: 'good_habit_pass_score',
+    good_habit_miss_score: 'good_habit_miss_score',
+    good_habit_fail_score: 'good_habit_fail_score',
+    habit_success_decay: 'habit_success_decay',
+
+    habit_fail: 'habit_fail',
+    bad_habit_avoid_score: 'bad_habit_avoid_score',
+    bad_habit_exception_score: 'bad_habit_exception_score',
+    bad_habit_fail_score: 'bad_habit_fail_score',
+    habit_fail_decay: 'habit_fail_decay',
+
+    habit_pair: 'habit_pair'
+  }
 
   default_scope { where(deleted_at: [nil]) }
 
@@ -28,6 +36,17 @@ class Happening < ApplicationRecord
                                                                     'good_habit_pass_score',
                                                                     'good_habit_fail_score',
                                                                     'habit_success_decay']) }
+  scope :habit_fail_inclusive, -> { where(event_kind: ['habit_fail',
+                                                       'bad_habit_fail_score',
+                                                       'bad_habit_exception_score',
+                                                       'bad_habit_avoid_score',]) }
+
+  scope :habit_fail_and_decay_inclusive, -> { where(event_kind: ['habit_fail',
+                                                                 'bad_habit_fail_score',
+                                                                 'bad_habit_exception_score',
+                                                                 'bad_habit_avoid_score',
+                                                                 'habit_fail_decay']) }
+
   after_update :rerun_decay
 
   def rerun_decay
