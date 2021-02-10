@@ -27,46 +27,44 @@
                   </div>
                   <p class="card-text"><%= template.description %></p>
 
-                  <% if template.good_habit_hit_score && template.enable_card? %>
-                    <%= button_to happenings_path,
-                                  method: :post,
-                                  params: { happening: { template_id: template,
-                                                         selected_user_id: selected_user.id,
-                                                         reporting_user_id: current_user.id,
-                                                         event_kind: :good_habit_hit_score } },
-                                  form_class: 'd-inline',
-                                  class: 'btn btn-success d-inline' do %>
-                      Success <%= template.good_habit_hit_score %>
-                    <% end %>
-                  <% end %>
+                  <!--                  Good Habit Buttons-->
+                  <%= render 'habit_score_button', template: template,
+                             event_kind: :good_habit_hit_score,
+                             button_text_1: '😃', button_text_2: 'hit', button_class: 'btn-success',
+                             disabled_conditional: false %>
 
-                  <% if template.good_habit_pass_score && template.enable_card? %>
-                    <% disabled = current_user.child? %>
-                    <%= button_to happenings_path,
-                                  method: :post,
-                                  params: { template_id: template,
-                                            selected_user_id: selected_user.id,
-                                            reporting_user_id: current_user.id,
-                                            event_kind: :good_habit_pass_score },
-                                  disabled: disabled,
-                                  form_class: 'd-inline',
-                                  class: "btn #{disabled ? 'btn-outline-warning' : 'btn-warning'} d-inline " do %>
-                      Pass <%= template.good_habit_pass_score %>
-                    <% end %>
-                  <% end %>
+                  <%= render 'habit_score_button', template: template,
+                             event_kind: :good_habit_miss_score,
+                             button_text_1: '😬', button_text_2: 'Missed', button_class: 'btn-warning',
+                             disabled_conditional: current_user.child? %>
 
-                  <% if template.good_habit_fail_score && template.enable_card? %>
-                    <%= button_to happenings_path,
-                                  method: :post,
-                                  params: { template_id: template,
-                                            selected_user_id: selected_user.id,
-                                            reporting_user_id: current_user.id,
-                                            event_kind: :good_habit_fail_score },
-                                  form_class: 'd-inline',
-                                  class: "btn btn-danger d-inline" do %>
-                      Fail <%= template.point_value %>
-                    <% end %>
-                  <% end %>
+                  <%= render 'habit_score_button', template: template,
+                             event_kind: :good_habit_pass_score,
+                             button_text_1: '😶', button_text_2: 'Passed', button_class: 'btn-warning',
+                             disabled_conditional: current_user.child? %>
+
+                  <%= render 'habit_score_button', template: template,
+                             event_kind: :good_habit_fail_score,
+                             button_text_1: '😕', button_text_2: 'Failed', button_class: 'btn-danger',
+                             disabled_conditional: false %>
+
+
+                  <!--                  Bad Habit Buttons-->
+
+                  <%= render 'habit_score_button', template: template,
+                             event_kind: :bad_habit_avoid_score,
+                             button_text_1: '😃', button_text_2: 'Avoided', button_class: 'btn-success',
+                             disabled_conditional: false %>
+
+                  <%= render 'habit_score_button', template: template,
+                             event_kind: :bad_habit_exception_score,
+                             button_text_1: '😶', button_text_2: 'Exception Made', button_class: 'btn-warning',
+                             disabled_conditional: false %>
+
+                  <%= render 'habit_score_button', template: template,
+                             event_kind: :bad_habit_fail_score,
+                             button_text_1: '😕', button_text_2: 'Failed', button_class: 'btn-danger',
+                             disabled_conditional: false %>
 
                   <p class="text-end">
                     <% case template.current_streak_kind %>

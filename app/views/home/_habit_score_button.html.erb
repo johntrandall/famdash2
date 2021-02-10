@@ -1,0 +1,15 @@
+<% if template.send(event_kind) && template.enable_card? %>
+  <% disabled_button_class = button_class.split('-').first + '-outline-' +button_class.split('-').second %>
+  <%= button_to happenings_path,
+                method: :post,
+                params: { happening: { template_id: template,
+                                       selected_user_id: selected_user.id,
+                                       reporting_user_id: current_user.id,
+                                       event_kind: event_kind } },
+                disabled: disabled_conditional,
+                form_class: 'd-inline',
+                class: "btn #{disabled_conditional ? disabled_button_class : button_class } d-inline " do %>
+    <%= button_text_1 %> <%= template.send(event_kind) %>
+    <small><%= button_text_2 %></small>
+  <% end %>
+<% end %>
