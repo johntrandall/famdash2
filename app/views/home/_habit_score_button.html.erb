@@ -9,7 +9,7 @@
                 disabled: disabled_conditional,
                 form_class: 'd-inline',
                 class: "btn #{disabled_conditional ? disabled_button_class : button_class } d-inline " do %>
-    <%= button_text_1 %> <%= template.send(event_kind) %>
+    <%= button_text_1 %> <%= template.send(event_kind) if template.send(event_kind).nonzero? %>
     <small><%= button_text_2 %></small>
   <% end %>
 <% end %>
