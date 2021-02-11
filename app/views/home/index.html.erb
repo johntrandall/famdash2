@@ -35,12 +35,12 @@
 
                   <%= render 'habit_score_button', template: template,
                              event_kind: :good_habit_miss_score,
-                             button_text_1: '😬', button_text_2: 'miss', button_class: 'btn-warning',
+                             button_text_1: '', button_text_2: 'miss', button_class: 'btn-warning',
                              disabled_conditional: current_user.child? %>
 
                   <%= render 'habit_score_button', template: template,
                              event_kind: :good_habit_pass_score,
-                             button_text_1: '😶', button_text_2: 'pass', button_class: 'btn-warning',
+                             button_text_1: '', button_text_2: 'pass', button_class: 'btn-warning',
                              disabled_conditional: current_user.child? %>
 
                   <%= render 'habit_score_button', template: template,
@@ -58,7 +58,7 @@
 
                   <%= render 'habit_score_button', template: template,
                              event_kind: :bad_habit_exception_score,
-                             button_text_1: '😶', button_text_2: 'exception', button_class: 'btn-warning',
+                             button_text_1: '', button_text_2: 'exception', button_class: 'btn-warning',
                              disabled_conditional: false %>
 
                   <%= render 'habit_score_button', template: template,
