@@ -66,16 +66,18 @@
                              button_text_1: '😕', button_text_2: 'fail', button_class: 'btn-danger',
                              disabled_conditional: false %>
 
-                  <p class="text-end mt-5">
-                    <% case template.current_streak_kind %>
-                    <% when :habit_success %>
-                      <%= "Daily Success Streak!" %>
-                      <span class="badge bg-success"><%= template.streak_count %></span>
-                    <% when :habit_fail %>
-                      <%= "Daily Fails Streak!" %>
-                      <span class="badge bg-danger"><%= template.streak_count %></span>
-                    <% end %>
-                  </p>
+                  <% if template.streak_count && template.streak_count > 1 && false # TODO hiding this for now because it is broken %>
+                    <p class="text-end mt-5">
+                      <% case template.current_streak_kind %>
+                      <% when :habit_success %>
+                        <%= "Daily Success Streak!" %>
+                        <span class="badge bg-success"><%= template.streak_count %></span>
+                      <% when :habit_fail %>
+                        <%= "Daily Fails Streak!" %>
+                        <span class="badge bg-danger"><%= template.streak_count %></span>
+                      <% end %>
+                    </p>
+                  <% end %>
 
                   <p class="text-end small">
                     last 14-days: <span class="badge bg-success"> <%= template.success_count_14_day %></span>
