@@ -25,7 +25,7 @@
                     </span>
                     <h6><%= template.name %></h6>
                   </div>
-                  <p class="card-text"><%= template.description %></p>
+                  <p class="card-text" style="white-space: pre-line;"><%= template.description %></p>
 
                   <!--                  Good Habit Buttons-->
                   <%= render 'habit_score_button', template: template,
@@ -66,17 +66,15 @@
                              button_text_1: '😕', button_text_2: 'Failed', button_class: 'btn-danger',
                              disabled_conditional: false %>
 
-                  <p class="text-end">
+                  <p class="text-end mt-5">
                     <% case template.current_streak_kind %>
                     <% when :habit_success %>
-                      <br>
                       <%= "Daily Success Streak!" %>
                       <span class="badge bg-success"><%= template.streak_count %></span>
                     <% when :habit_fail %>
-                      <br>
                       <%= "Daily Fails Streak!" %>
                       <span class="badge bg-danger"><%= template.streak_count %></span>
-                    <% end %><br>
+                    <% end %>
                   </p>
 
                   <p class="text-end small">
