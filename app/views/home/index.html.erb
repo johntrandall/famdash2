@@ -17,7 +17,8 @@
 
           <% else %>
             <div class="col-sm-3">
-              <div class="card mb-4 <%= "bg-secondary text-light" if !template.enable_card? %>">
+              <div id="template_card-<%= template.id %>"
+                   class="card mb-4 <%= "bg-secondary text-light" if !template.enable_card? %>">
                 <div class="card-body">
                   <div class="card-title">
                     <span class="float-end">

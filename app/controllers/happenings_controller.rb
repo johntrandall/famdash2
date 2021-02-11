@@ -44,7 +44,7 @@ class HappeningsController < ApplicationController
                                                              'allowed_entries_daily_count')
     )
 
-    redirect_back fallback_location: root_path
+    redirect_to root_path(anchor: "template_card-#{happening_template.id}")
   end
 
   def edit
