@@ -5,6 +5,8 @@ class HappeningTemplatesController < ApplicationController
       return
     end
     @happening_templates = selected_user.happening_templates
+    @maximum_good_habit_score = selected_user.happening_templates.where.not(good_habit_hit_score:nil).sum(:good_habit_hit_score)
+    @maximum_bad_habit_fail_score = selected_user.happening_templates.where.not(bad_habit_fail_score:nil).sum(:bad_habit_fail_score)
   end
 
   def show

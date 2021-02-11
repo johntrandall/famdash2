@@ -5,20 +5,27 @@
 <% if current_user && selected_user %>
 
 
+  <section>
+    <!--  NEW FORM-->
+    <h3 style="text-decoration: underline">Create New</h3>
 
-  <!--  NEW FORM-->
-  <h3 style="text-decoration: underline">Create New</h3>
+    <%= render 'template_row_form', template: selected_user.dup.happening_templates.build %>
 
-  <%= render 'template_row_form', template: selected_user.dup.happening_templates.build %>
-
-  <!--  INDEX -->
-  <% @happening_templates.each do |template| %>
-    <!--SEPERATOR-->
-    <hr>
-    <% if template.separator? %>
-      <h3 class="mt-5" style="text-decoration: underline"><%= template.name %></h3>
+    <!--  INDEX -->
+    <% @happening_templates.each do |template| %>
+      <!--SEPERATOR-->
+      <hr>
+      <% if template.separator? %>
+        <h3 class="mt-5" style="text-decoration: underline"><%= template.name %></h3>
+      <% end %>
+      <!--      TEMPLATES-->
+      <%= render 'template_row_form', template: template %>
     <% end %>
-    <!--      TEMPLATES-->
-    <%= render 'template_row_form', template: template %>
-  <% end %>
+  </section>
+
+  <section class="mt-5">
+    <h2>Totals</h2>
+    <p>Maximum available good-habit points if all good habits are hit: <%= @maximum_good_habit_score %></p>
+    <p>Minimum available bad-habit points if all bad habits are failed: <%= @maximum_bad_habit_fail_score %></p>
+  </section>
 <% end %>
