@@ -25,7 +25,7 @@ class HappeningTemplatesController < ApplicationController
     happening_template.update!(happening_template_params)
     flash[:success] = 'Habit updated'
 
-    redirect_back(fallback_location: happening_templates_path, anchor: "happening_template-id-#{happening_template.id}")
+    redirect_to(happening_templates_path(anchor: "edit_happening_template_#{happening_template.id}"))
   end
 
   def destroy
@@ -41,7 +41,7 @@ class HappeningTemplatesController < ApplicationController
     happening_template.decrement_position
     flash[:success] = 'Order adjusted'
 
-    redirect_back(fallback_location: happening_templates_path)
+    redirect_to(happening_templates_path(anchor: "edit_happening_template_#{happening_template.id}"))
   end
 
   def sort_down
@@ -49,7 +49,7 @@ class HappeningTemplatesController < ApplicationController
     happening_template.increment_position
     flash[:success] = 'Order adjusted'
 
-    redirect_back(fallback_location: happening_templates_path)
+    redirect_to(happening_templates_path(anchor: "edit_happening_template_#{happening_template.id}"))
   end
 
   private
