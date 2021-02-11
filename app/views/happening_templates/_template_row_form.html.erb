@@ -1,22 +1,22 @@
-<%= simple_form_for template, id: "happeningTemplate-#{template.id}" do |f| %>
+<%= simple_form_for template, id: "happening_template-id-#{template.id}" do |f| %>
   <%#= f.hidden_field :selected_user %>
 
   <div class="row align-items-end">
-    <%= f.input :name, wrapper_html: { class: 'col-auto' } %>
+    <%= f.input :name, wrapper_html: { class: 'col-2' } %>
     <%= f.input :kind, label: 'Kind', collection: HappeningTemplate.kinds.keys, wrapper_html: { class: 'col-auto' } %>
-    <%= f.input :point_value, label: 'Points', wrapper_html: { class: 'col-1' } %>
+    <%= f.input :point_value, label: 'Points', wrapper_html: { class: 'col-2' } %>
 
-    <%= f.input :good_habit_hit_score, wrapper_html: { class: 'col-1' } %>
-    <%= f.input :good_habit_pass_score, wrapper_html: { class: 'col-1' } %>
-    <%= f.input :good_habit_miss_score, wrapper_html: { class: 'col-1' } %>
-    <%= f.input :good_habit_fail_score, wrapper_html: { class: 'col-1' } %>
+    <%= f.input :good_habit_hit_score, wrapper_html: { class: 'col-2' } %>
+    <%= f.input :good_habit_pass_score, wrapper_html: { class: 'col-2' } %>
+    <%= f.input :good_habit_miss_score, wrapper_html: { class: 'col-2' } %>
+    <%= f.input :good_habit_fail_score, wrapper_html: { class: 'col-2' } %>
 
-    <%= f.input :bad_habit_avoid_score, wrapper_html: { class: 'col-1' } %>
-    <%= f.input :bad_habit_exception_score, wrapper_html: { class: 'col-1' } %>
-    <%= f.input :bad_habit_fail_score, wrapper_html: { class: 'col-1' } %>
+    <%= f.input :bad_habit_avoid_score, wrapper_html: { class: 'col-2' } %>
+    <%= f.input :bad_habit_exception_score, wrapper_html: { class: 'col-2' } %>
+    <%= f.input :bad_habit_fail_score, wrapper_html: { class: 'col-2' } %>
 
     <%= f.input :allowed_entries_daily_count, label: 'Daily limit', wrapper_html: { class: 'col-1' } %>
-    <%= f.input :description, as: :text, wrapper_html: { class: 'col-auto' } %>
+    <%= f.input :description, as: :text, wrapper_html: { class: 'col-3' } %>
 
     <div class="col-auto">
       <%= f.input :show_success_button, label: 'show hit' %>
