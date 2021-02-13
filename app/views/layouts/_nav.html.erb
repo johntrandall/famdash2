@@ -38,20 +38,23 @@
     <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <%= link_to_unless_current 'Habits', home_index_path, class: "nav-link #{ 'active' if controller.is_a? HomeController }" %>
+            <%= link_to 'Habits', home_index_path, class: "nav-link #{ 'active' if controller.is_a? HomeController }" %>
           </li>
           <li class="nav-item">
-            <%= link_to_unless_current 'Habit Log index',
+            <%= link_to 'Habit Log index',
                         happenings_path,
                         class: "nav-link #{ 'active' if controller.is_a?(HappeningsController) && action_name == 'index'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to_unless_current 'Habit Grid Index',
+            <%= link_to 'Habit Grid Index',
                         grid_index_happenings_path,
                         class: "nav-link #{ 'active' if controller.is_a?(HappeningsController) && action_name == 'grid_index'}" %>
           </li>
           <li class="nav-item">
-            <%= link_to_unless_current 'Habit Setup', happening_templates_path, class: "nav-link #{ 'active' if controller.is_a? HappeningTemplatesController }" %>
+            <%= link_to 'Habit Setup', happening_templates_path, class: "nav-link #{ 'active' if controller.is_a? HappeningTemplatesController }" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'User Settings', edit_user_path, class: "nav-link #{ 'active' if controller.is_a? HappeningTemplatesController }" %>
           </li>
         </ul>
     </div>
