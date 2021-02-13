@@ -14,11 +14,11 @@ class User < ApplicationRecord
   end
 
   def good_habit_score
-    happenings.habit_success.sum(:point_value)
+    happenings.habit_success_and_decay_inclusive.sum(:point_value)
   end
 
   def bad_habit_score
-    happenings.habit_fail.sum(:point_value)
+    happenings.habit_fail_and_decay_inclusive.sum(:point_value)
   end
 
   def create_happening_to_decay_habit_success_score!(date:)
