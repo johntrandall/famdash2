@@ -13,8 +13,20 @@ class User < ApplicationRecord
     display_name
   end
 
+  def screentime_allowed?
+    good_habit_score_threshold_satisfied? && bad_habit_score_threshold_satisfied?
+  end
+
+  def good_habit_score_threshold_satisfied?
+    100 < good_habit_score
+  end
+
   def good_habit_score
     happenings.habit_success_and_decay_inclusive.sum(:point_value)
+  end
+
+  def bad_habit_score_threshold_satisfied?
+    bad_habit_score < 100
   end
 
   def bad_habit_score

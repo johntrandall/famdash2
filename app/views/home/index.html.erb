@@ -1,12 +1,12 @@
 <% if current_user && selected_user %>
   <% if selected_user.child? %>
     <section>
-      <header>
-        <h2>Habit Reporting</h2>
-        <%= render 'happenings/habit_scores' %>
-      </header>
-      <br>
+      <h2>Habit Reporting</h2>
+      <%= render 'happenings/habit_scores' %>
+    </section>
+    <br>
 
+    <section>
       <div class="row">
         <% selected_user.happening_templates.active.each do |template| %>
 
@@ -67,7 +67,8 @@
                              button_text_1: '😕', button_text_2: 'fail', button_class: 'btn-danger',
                              disabled_conditional: false %>
 
-                  <% if template.streak_count && template.streak_count > 1 && false # TODO hiding this for now because it is broken %>
+                  <% if template.streak_count && template.streak_count > 1 && false
+                       # TODO hiding this for now because it is broken %>
                     <p class="text-end mt-5">
                       <% case template.current_streak_kind %>
                       <% when :habit_success %>

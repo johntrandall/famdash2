@@ -1,5 +1,10 @@
-<h4 style="display:inline">Good Habit Score: <%= selected_user.good_habit_score %></h4>
+<strong>
+  Can <%= selected_user.display_name %> have screentime?
+  <h1 class="<%= selected_user.screentime_allowed? ? 'text-success' : 'text-danger' %>"><%= selected_user.screentime_allowed? ? "Yes!" : "No!" %></h1>
+</strong>
+
+<strong>Good Habit Score: <%= selected_user.good_habit_score %></strong>
 <small>(Keep this above 100 to unlock screentime)</small><br>
 
-<h4 style="display:inline">Bad Habit Score: <%= selected_user.bad_habit_score %></h4>
+<strong>Bad Habit Score: <%= selected_user.bad_habit_score %></strong>
 <small>(Keep this below 100 to unlock screentime)</small>
