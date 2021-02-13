@@ -18,7 +18,7 @@ class User < ApplicationRecord
   end
 
   def good_habit_score_threshold_satisfied?
-    100 < good_habit_score
+    100 <= good_habit_score
   end
 
   def good_habit_score
@@ -26,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def bad_habit_score_threshold_satisfied?
-    bad_habit_score < 100
+    bad_habit_score <= 100
   end
 
   def bad_habit_score

@@ -1,5 +1,5 @@
 <strong>
-  Can <%= selected_user.display_name %> have screentime?
+  Do habits unlock screentime unlocked for <%= selected_user.display_name %>?
   <h1 class="<%= selected_user.screentime_allowed? ? 'text-success' : 'text-danger' %>"><%= selected_user.screentime_allowed? ? "Yes!" : "No!" %></h1>
 </strong>
 
