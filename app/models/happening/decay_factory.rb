@@ -11,7 +11,7 @@ class Happening
 
       array_of_last_7_days.each do |date|
         create_habit_success_decay(date, user)
-        # create_habit_fail_decay(date, user)
+        create_habit_fail_decay(date, user)
       end
     end
 
